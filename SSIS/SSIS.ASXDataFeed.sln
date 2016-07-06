@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS.ASXStockPrices", "SSIS.ASXStockPrices\SSIS.ASXStockPrices.dtproj", "{6704B19C-A9E0-4CD6-A73A-84AE48ABE245}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS.AFR", "SSIS.AFR\SSIS.AFR.dtproj", "{1E143EB8-A394-44D9-8015-9A73C50C0812}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6704B19C-A9E0-4CD6-A73A-84AE48ABE245}.Development|Default.ActiveCfg = Development
+		{6704B19C-A9E0-4CD6-A73A-84AE48ABE245}.Development|Default.Build.0 = Development
+		{1E143EB8-A394-44D9-8015-9A73C50C0812}.Development|Default.ActiveCfg = Development
+		{1E143EB8-A394-44D9-8015-9A73C50C0812}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

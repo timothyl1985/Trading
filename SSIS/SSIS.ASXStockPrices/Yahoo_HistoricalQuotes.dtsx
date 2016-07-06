@@ -1,0 +1,3332 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/5/2015 12:38:47 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="BIGHEADGIRL"
+  DTS:CreatorName="BIGHEADGIRL\timothy"
+  DTS:DTSID="{C351B049-6C3A-4F67-899F-97C81C58E6E7}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3513.0"
+  DTS:LocaleID="3081"
+  DTS:ObjectName="Yahoo_HistoricalQuotes"
+  DTS:PackageType="5"
+  DTS:VersionBuild="187"
+  DTS:VersionGUID="{3B403C04-8D06-4F1D-8FEE-4B566C455698}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{73C1434C-085F-4B1B-8301-2B82C1F62178}"
+      DTS:ObjectName="pBatchSize">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">365</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{F77718EB-321E-4F7C-B520-8E9B5D4ACFAD}"
+      DTS:ObjectName="pEndDate">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">12:00:00 AM</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{7C8FE5AF-1CC7-41E9-8DC5-A71FDA3AE579}"
+      DTS:ObjectName="pExecutionMode">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{5D8D4BC4-2459-4DC6-B812-EDB5E78B493A}"
+      DTS:ObjectName="pStartDate">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">12:00:00 AM</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5DD80945-84C8-4E83-AFCC-9B12214449E7}"
+      DTS:ObjectName="pTicker">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">BHP</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2442A7AC-4C5E-4827-9AB7-21D7A0A0805F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vASXCompaniesRecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D6CCE3CA-90A2-47AF-B924-8190C53A465E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vEndDate">
+      <DTS:VariableValue
+        DTS:DataType="7">5/13/2016 11:58:49 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3712A77F-03F6-4488-862E-DC660FE35BDE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vStartDate">
+      <DTS:VariableValue
+        DTS:DataType="7">5/13/2016 11:58:51 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{45CC2E5B-05A9-4DEB-9072-7A57FA6A79D1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vTicker">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence {Extract\}"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6822AF0C-5369-4594-91F0-DB7C2171D684}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence {Extract}">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{9A446DDB-AEC1-4149-BF24-3801C81C2FE5}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow {Get All Ticker Codes}"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Destination {ASX Companies\}"
+                  componentClassID="{C457FD7E-CE98-4C4B-AEFE-F3AE0044F181}"
+                  contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+                  name="Destination {ASX Companies}">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the recordset."
+                      name="VariableName">User::vASXCompaniesRecordSet</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Destination {ASX Companies\}.Inputs[Recordset Destination Input]"
+                      hasSideEffects="true"
+                      name="Recordset Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Destination {ASX Companies\}.Inputs[Recordset Destination Input].Columns[Ticker]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="13"
+                          cachedName="Ticker"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output].Columns[Ticker]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source {ASX Companies}"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select Ticker
+from Market.ASXCompany
+where IsEnabled = 1
+order by Ticker asc</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Connections[OleDbConnection]"
+                      connectionManagerID="{E2880A79-FC14-414C-B72E-D144E9D8BE62}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CMD TIMDB]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output].Columns[Ticker]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output].ExternalColumns[Ticker]"
+                          length="13"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output].Columns[Ticker]"
+                          name="Ticker"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output].ExternalColumns[Ticker]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Ticker" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output].Columns[Ticker]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output].Columns[Ticker]"
+                          name="Ticker" />
+                        <outputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Destination {ASX Companies\}.Inputs[Recordset Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{2C1F882F-FF0D-448B-BE0E-D389506FB9E9}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow {Single Ticker Only}"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Destination {ASX Companies\}"
+                  componentClassID="{C457FD7E-CE98-4C4B-AEFE-F3AE0044F181}"
+                  contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+                  name="Destination {ASX Companies}">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the recordset."
+                      name="VariableName">User::vASXCompaniesRecordSet</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Destination {ASX Companies\}.Inputs[Recordset Destination Input]"
+                      hasSideEffects="true"
+                      name="Recordset Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Destination {ASX Companies\}.Inputs[Recordset Destination Input].Columns[Ticker]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="13"
+                          cachedName="Ticker"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}.Outputs[Output 0].Columns[Ticker]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}"
+                  componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+                  contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;8"
+                  description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+                  name="Script {Create Row From Ticker}"
+                  version="8">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Stores the source code of the component"
+                      isArray="true"
+                      name="SourceCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="30">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    public override void CreateNewOutputRows()
+    {
+        /*
+          Add rows by calling the AddRow method on the member variable named "<Output Name>Buffer".
+          For example, call MyOutputBuffer.AddRow() if your output was named "MyOutput".
+        */
+        Output0Buffer.AddRow();
+        Output0Buffer.Ticker = Variables.pTicker;
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Output0Buffer: ScriptBuffer
+
+{
+    public Output0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String Ticker
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool Ticker_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public Output0Buffer Output0Buffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != Output0Buffer)
+        {
+            Output0Buffer.SetEndOfRowset();
+            Output0Buffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Output 0"))
+            {
+                Output0Buffer = new Output0Buffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String pTicker
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["pTicker"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_02616ef8983d4eb4bfc67cafc91205a6.csproj]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F0B75E0-113B-4736-BD8E-49F55D5A362F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_02616ef8983d4eb4bfc67cafc91205a6</RootNamespace>
+    <AssemblyName>SC_02616ef8983d4eb4bfc67cafc91205a6</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="devenv.exe" DebugInfoCommandLine="/vstaHostDebugUri:&quot;vstadebug1f0115f8-215e-4e00-9043-d9fec856a983/b108a326-586b-4f9e-a37d-269cb0404403&quot;" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_02616ef8983d4eb4bfc67cafc91205a6.Properties.Settings.get_Default():SC_02616ef8983d4eb4bfc67cafc91205a6.Properties.Sett" +
+    "ings")]
+
+namespace SC_02616ef8983d4eb4bfc67cafc91205a6.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Project]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>SC_02616ef8983d4eb4bfc67cafc91205a6</msb:CodeName>
+		<msb:DisplayName>SC_02616ef8983d4eb4bfc67cafc91205a6</msb:DisplayName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:ProjectId>{0A3AEF5F-513E-40AD-9505-F25ABBD928E3}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_02616ef8983d4eb4bfc67cafc91205a6.csproj"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_02616ef8983d4eb4bfc67cafc91205a6")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_02616ef8983d4eb4bfc67cafc91205a6")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_02616ef8983d4eb4bfc67cafc91205a6.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_02616ef8983d4eb4bfc67cafc91205a6.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_02616ef8983d4eb4bfc67cafc91205a6.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_02616ef8983d4eb4bfc67cafc91205a6.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_02616ef8983d4eb4bfc67cafc91205a6.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Stores the binary representation of the component"
+                      isArray="true"
+                      name="BinaryCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="2">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_02616ef8983d4eb4bfc67cafc91205a6.dll]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAAh6NFcAAAAAAAAAAOAAAiELAQsAABQAAAAIAAAAAAAAnjMA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAFAzAABLAAAAAEAAAAgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAApBMAAAAgAAAAFAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAAgEAAAAQAAAAAYAAAAWAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAHAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACA
+MwAAAAAAAEgAAAACAAUA0CIAAIAQAAABAAAAAAAAABgiAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4CKA0AAAoCAnMQAAAGfQEAAAQCAnMRAAAGfQIAAAQqBipu
+AnsDAAAELBICewMAAARvDgAABgIUfQMAAAQqAAATMAUASQAAAAEAABEWCisuBAaUDgRyAQAAcCgO
+AAAKMxkCBQaaAgQGlCgPAAAKDgRzCgAABn0DAAAEBhdYCgYDMs4CbwUAAAYCbwIAAAYCKAMAAAYq
+BioeAigRAAAKKh4CKBIAAAoqigJ7AwAABG8NAAAGAnsDAAAEAnsCAAAEbxIAAAZvCwAABioeAigB
+AAAGKioCAwQFKBMAAAoqJgIWAygUAAAKKloDLAgCFigVAAAKKnITAABwcxYAAAp6HgIoFwAACioe
+AigYAAAKKh4CKBkAAAoqOgIoGgAACgIDfQQAAAQqOgIoGgAACgIDfQUAAAQqlgJ7BQAABG8bAAAK
+crAAAHBvHAAACigdAAAKbx4AAAp0GwAAASoeAigaAAAKKgAAEzACAC0AAAACAAARfgYAAAQtIHLA
+AABw0AcAAAIoIAAACm8hAAAKcyIAAAoKBoAGAAAEfgYAAAQqGn4HAAAEKh4CgAcAAAQqGn4IAAAE
+Ki5zGAAABoAIAAAEKh4CKCUAAAoqALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5S
+ZXNvdXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFs
+LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGlt
+ZVJlc291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQAAABCU0pCAQABAAAAAAAMAAAAdjQuMC4z
+MDMxOQAAAAAFAGwAAACUBQAAI34AAAAGAACUBwAAI1N0cmluZ3MAAAAAlA0AADQBAAAjVVMAyA4A
+ABAAAAAjR1VJRAAAANgOAACoAQAAI0Jsb2IAAAAAAAAAAgAAAVcVogEJAQAAAPolMwAWAAABAAAA
+IgAAAAgAAAAIAAAAGQAAAAwAAAAlAAAADwAAAAIAAAAEAAAABgAAAAcAAAABAAAABQAAAAEAAAAA
+AAoAAQAAAAAABgDvAM4ABgD/AM4ACgAcARUBDgA4ASMBEgCZAc4ABgCoAc4ACgB2AmUCCgCnApIC
+CgCEA2oDCgCvA50DCgDGA50DCgDjA50DCgACBJ0DCgAbBJ0DCgA0BJ0DCgBPBJ0DCgBqBJ0DCgCD
+BJ0DCgC8BJwECgDcBJwEBgA7Bc4ACgBzBRUBFgDYBbAFFgD/BbAFBwAYBgAAFgBIBrAFCgB0BhUB
+CgCOBnsGCgCrBhUBCgCwBhUBCgDUBp0DDgAAB+oGDgAZB+oGCgAuB5wEAAAAAAEAAAAAAAEAAQAB
+ABAAMgAAAAUAAQABAAEAEABAAAAACAAEAAYAAQAQAEsAAAAJAAQACgABABAAWQAAAA0ABAAQAAEA
+EABlAAAADQAFABEAAAAQAG8AeQANAAYAEwAAARAAqAB5ABEACAAXAAYAWQATAAYAZQAXAAYASwAf
+AAEAQQJPAAEAQQJPABEAhgJdABEAswJhABEA9wJ/AFAgAAAAAIYYUAEbAAEAcCAAAAAAxgFWARsA
+AQByIAAAAACBAGQBGwABAJAgAAAAAMYAtgEjAAEA5SAAAAAAxgHCARsABQDnIAAAAADGANYBGwAF
+AO8gAAAAAMYA4QEbAAUA9yAAAAAAxgDCARsABQAaIQAAAACGGFABGwAFACIhAAAAAIYYUAEvAAUA
+LSEAAAAAhgjtATkACAA3IQAAAACGCPgBPgAJAE4hAAAAAIYACgIbAAoAViEAAAAAhgARAhsACgBe
+IQAAAACGACACQwAKAGYhAAAAAIYYUAFTAAoAdSEAAAAAhhhQAVMACwCEIQAAAACGCFECWQAMAKoh
+AAAAAIMYUAEbAAwAtCEAAAAAkwjDAmUADADtIQAAAACTCNcCagAMAPQhAAAAAJMI4wJvAAwA/CEA
+AAAAlggHA4MADQAPIgAAAACGGFABGwANAAMiAAAAAJEYSQfsAA0AAAABABsDAAACACMDAAADAC0D
+AAAEADUDAAABAD8DAAACAEYDAAADADUDAAABAFoDAAABAFoDAAABAGADAAABAGADAAABAFoDSQBQ
+ATkAUQBQATkAWQBQATkAYQBQATkAaQBQATkAcQBQATkAeQBQATkAgQBQATkAiQBQATkAkQBQATkA
+mQBQAY0AoQBQARsACQBQARsACQAeBZIACQAqBZkAqQBQARsACQDWARsACQDhARsAEQBQAS8AEQBi
+BagAEQBrBY0AsQBQATkAEQAKAhsAEQARAhsAEQAgAkMAGQBQARsACQDpBa4AuQAPBrMACQAzBrkA
+wQBgBr4A4QBQARsA6QDCBsQA6QDdBssAOQBQAdAAAQFQAdwAEQFQARsAIQBQARsALgAbAGEBLgBj
+AIcBLgALAPAALgATADgBLgAjAGEBLgArAGEBLgAzADgBLgA7AGcBLgBDAGEBLgBbAH4BYwCDAKMA
+iQAbAeMAqQAbAeMA4wD7AKMAAQEjAaMAnwDXAAQAAQAGAAMABwAEAAgABgAAACwCRwAAADMCSwAA
+AF0CRwAAAHYCdQAAAO8CegAAABMDiAABAAsAAwABAAwABQACABIABwACABQACQACABUACwABABYA
+CwACABcADQAEgAAAAQAAAFgXlJ8AAAAAAAD6BAAACwAAAAAAAAAAAAAAAQCxAAAAAAAEAAAAAAAA
+AAAAAAAKAAwBAAAAAAQAAAAAAAAAAAAAAAoAFQEAAAAACwAAAAAAAAAAAAAAAQB4AQAAAAALAAAA
+AAAAAAAAAAABAI0FAAAAAAAAAAABAAAAUAcAAAAAAAAAPE1vZHVsZT4AU0NfMDI2MTZlZjg5ODNk
+NGViNGJmYzY3Y2FmYzkxMjA1YTYuZGxsAFVzZXJDb21wb25lbnQAU2NyaXB0TWFpbgBPdXRwdXQw
+QnVmZmVyAENvbm5lY3Rpb25zAFZhcmlhYmxlcwBSZXNvdXJjZXMAU0NfMDI2MTZlZjg5ODNkNGVi
+NGJmYzY3Y2FmYzkxMjA1YTYuUHJvcGVydGllcwBTZXR0aW5ncwBNaWNyb3NvZnQuU3FsU2VydmVy
+LlR4U2NyaXB0AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lAFNjcmlwdENvbXBvbmVu
+dABTY3JpcHRCdWZmZXIAbXNjb3JsaWIAU3lzdGVtAE9iamVjdABTeXN0ZW0uQ29uZmlndXJhdGlv
+bgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQAuY3RvcgBGaW5pc2hPdXRwdXRzAE1hcmtPdXRwdXRz
+RmluaXNoZWQATWljcm9zb2Z0LlNxbFNlcnZlci5QaXBlbGluZUhvc3QAUGlwZWxpbmVCdWZmZXIA
+T3V0cHV0TmFtZU1hcABQcmltZU91dHB1dABDcmVhdGVOZXdPdXRwdXRSb3dzAFByZUV4ZWN1dGUA
+UG9zdEV4ZWN1dGUAc2V0X1RpY2tlcgBzZXRfVGlja2VyX0lzTnVsbABBZGRSb3cAU2V0RW5kT2ZS
+b3dzZXQARW5kT2ZSb3dzZXQAVGlja2VyAFRpY2tlcl9Jc051bGwAUGFyZW50Q29tcG9uZW50AGdl
+dF9wVGlja2VyAHBUaWNrZXIAU3lzdGVtLlJlc291cmNlcwBSZXNvdXJjZU1hbmFnZXIAcmVzb3Vy
+Y2VNYW4AU3lzdGVtLkdsb2JhbGl6YXRpb24AQ3VsdHVyZUluZm8AcmVzb3VyY2VDdWx0dXJlAGdl
+dF9SZXNvdXJjZU1hbmFnZXIAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAQ3VsdHVyZQBkZWZhdWx0
+SW5zdGFuY2UAZ2V0X0RlZmF1bHQARGVmYXVsdABPdXRwdXRzAE91dHB1dElEcwBCdWZmZXJzAE91
+dHB1dE1hcABCdWZmZXIAQnVmZmVyQ29sdW1uSW5kZXhlcwB2YWx1ZQBDb21wb25lbnQAU3lzdGVt
+LlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAU3lzdGVtLlJlZmxl
+Y3Rpb24AQXNzZW1ibHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRl
+AEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUA
+QXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAEFzc2Vt
+Ymx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q3VsdHVyZUF0dHJpYnV0ZQBBc3NlbWJseVZl
+cnNpb25BdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBDb21waWxhdGlv
+blJlbGF4YXRpb25zQXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAFNDXzAy
+NjE2ZWY4OTgzZDRlYjRiZmM2N2NhZmM5MTIwNWE2AEdldE91dHB1dElEAEdldENvbHVtbkluZGV4
+ZXMAU1NJU1NjcmlwdENvbXBvbmVudEVudHJ5UG9pbnRBdHRyaWJ1dGUAc2V0X0l0ZW0AU2V0TnVs
+bABJbnZhbGlkT3BlcmF0aW9uRXhjZXB0aW9uAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUnVudGlt
+ZVdyYXAATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVudGltZS5XcmFwcGVyAElEVFNWYXJpYWJs
+ZXMxMDAAZ2V0X1JlYWRPbmx5VmFyaWFibGVzAElEVFNWYXJpYWJsZTEwMABnZXRfSXRlbQBTY3Jp
+cHRDb21wb25lbnRFdmFsQ29udGV4dABnZXRfRXZhbHVhdG9yQ29udGV4dABJRFRTRXZhbHVhdG9y
+Q29udGV4dDEwMABHZXRWYWx1ZVdpdGhDb250ZXh0AFN0cmluZwBTeXN0ZW0uRGlhZ25vc3RpY3MA
+RGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBUeXBlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5
+cGVGcm9tSGFuZGxlAEFzc2VtYmx5AGdldF9Bc3NlbWJseQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwA
+RWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2Vu
+ZXJhdGVkQXR0cmlidXRlAC5jY3RvcgBTQ18wMjYxNmVmODk4M2Q0ZWI0YmZjNjdjYWZjOTEyMDVh
+Ni5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMAAAARTwB1AHQAcAB1AHQAIAAwAACAm0kA
+cwBOAHUAbABsACAAcAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAg
+AHQAbwAgAEYAYQBsAHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAA
+dABoAGUAIABjAG8AbAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAAD3AAVABpAGMAawBlAHIAAHFT
+AEMAXwAwADIANgAxADYAZQBmADgAOQA4ADMAZAA0AGUAYgA0AGIAZgBjADYANwBjAGEAZgBjADkA
+MQAyADAANQBhADYALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAAAA
+Q/TTiyCL0EWJYkUnAVXaawAIiYRdzYCAzJEIt3pcVhk04IkDBhIUAwYSGAMgAAEDBhIQCyAEAQgd
+CB0SFRIZCSADARIVHQgSGQQgAQEOBCABAQIDIAACAygADgMoAAIDBhIFBSABARIFAyAADgMGEh0D
+BhIhBAAAEh0EAAASIQUAAQESIQQIABIdBAgAEiEDBhIgBAAAEiAECAASIAQgAQEIBgACCBIZDgUg
+AR0ICAMHAQgEAQAAAAUgAgEIHAQgABJdBSABEmEcBAAAEmUFIAEcEmkGAAESdRF5BCAAEn0GIAIB
+DhJ9BAcBEh0GIAEBEYCFCAEAAgAAAAAAAwAAAUcBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQu
+MAEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNCgBACNTQ18wMjYxNmVm
+ODk4M2Q0ZWI0YmZjNjdjYWZjOTEyMDVhNgAABQEAAAAAFgEAEUNvcHlyaWdodCBAICAyMDE2AAAI
+AQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBAAB4MwAAAAAAAAAAAACOMwAA
+ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgDMAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxs
+AAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAA
+SAAAAFhAAACwAwAAAAAAAAAAAACwAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAA
+AAAAvQTv/gAAAQAAAAEAlJ9YFwAAAQCUn1gXPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
+AAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBu
+AAAAAAAAALAEEAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAA7AIAAAEAMAAwADAA
+MAAwADQAYgAwAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAQwBf
+ADAAMgA2ADEANgBlAGYAOAA5ADgAMwBkADQAZQBiADQAYgBmAGMANgA3AGMAYQBmAGMAOQAxADIA
+MAA1AGEANgAAAEAADwABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgA1ADkANwA2
+AC4ANAAwADgANQAyAAAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfADAA
+MgA2ADEANgBlAGYAOAA5ADgAMwBkADQAZQBiADQAYgBmAGMANgA3AGMAYQBmAGMAOQAxADIAMAA1
+AGEANgAuAGQAbABsAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAA
+eQByAGkAZwBoAHQAIABAACAAIAAyADAAMQA2AAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBs
+AGUAbgBhAG0AZQAAAFMAQwBfADAAMgA2ADEANgBlAGYAOAA5ADgAMwBkADQAZQBiADQAYgBmAGMA
+NgA3AGMAYQBmAGMAOQAxADIAMAA1AGEANgAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABO
+AGEAbQBlAAAAAABTAEMAXwAwADIANgAxADYAZQBmADgAOQA4ADMAZAA0AGUAYgA0AGIAZgBjADYA
+NwBjAGEAZgBjADkAMQAyADAANQBhADYAAABEAA8AAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBv
+AG4AAAAxAC4AMAAuADUAOQA3ADYALgA0ADAAOAA1ADIAAAAAAEgADwABAEEAcwBzAGUAbQBiAGwA
+eQAgAFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADUAOQA3ADYALgA0ADAAOAA1ADIAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAoDMAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                      name="VSTAProjectName"
+                      typeConverter="NOTBROWSABLE">SC_02616ef8983d4eb4bfc67cafc91205a6</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the programming language used by the script."
+                      name="ScriptLanguage"
+                      typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages, Microsoft.SqlServer.VSTAScriptingLib, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">CSharp</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read-only variables."
+                      name="ReadOnlyVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">$Package::pTicker</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read/write variables."
+                      name="ReadWriteVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="List of breakpoints present on the script."
+                      isArray="true"
+                      name="BreakpointCollection"
+                      typeConverter="NOTBROWSABLE">
+                      <arrayElements
+                        arrayElementCount="0" />
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Checksum to match component metedata against compiled codes."
+                      name="MetadataChecksum"
+                      typeConverter="NOTBROWSABLE">f8f73ba459df8fd18c2584f1272e1144</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.ScriptComponentHost, Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+                  </properties>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}.Outputs[Output 0]"
+                      hasSideEffects="true"
+                      name="Output 0">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}.Outputs[Output 0].Columns[Ticker]"
+                          codePage="1252"
+                          dataType="str"
+                          length="13"
+                          lineageId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}.Outputs[Output 0].Columns[Ticker]"
+                          name="Ticker" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}.Paths[Output 0]"
+                  endId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Destination {ASX Companies\}.Inputs[Recordset Destination Input]"
+                  name="Output 0"
+                  startId="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}.Outputs[Output 0]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence {Extract\}\Foreach {Ticker\}"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{67AEA763-EF09-4BD9-AEE3-B83426571220}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach {Ticker}">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.SqlServer.Dts.Runtime.Enumerators.ADO.ForEachADOEnumerator, Microsoft.SqlServer.ForEachADOEnumerator, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+            DTS:DTSID="{3E569E5A-EACD-44D2-AFB5-86D3CB3D32D1}"
+            DTS:ObjectName="{3E569E5A-EACD-44D2-AFB5-86D3CB3D32D1}">
+            <DTS:ObjectData>
+              <FEEADO
+                EnumType="EnumerateRowsInFirstTable"
+                VarName="User::vASXCompaniesRecordSet" />
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}"
+              DTS:CreationName="SSIS.Pipeline.3"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{1DB02832-07EC-4F98-97D8-C5F494CBA1C4}"
+              DTS:ExecutableType="SSIS.Pipeline.3"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Data Flow {Get Historical Prices}"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}"
+                      componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                      contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                      name="Derived {Audit Columns}"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Inputs[Derived Column Input]"
+                          description="Input to the Derived Column Transformation"
+                          name="Derived Column Input">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output]"
+                          description="Default Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          name="Derived Column Output"
+                          synchronousInputId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output].Columns[Derived_CreatedDateTime]"
+                              dataType="dbTimeStamp"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output].Columns[Derived_CreatedDateTime]"
+                              name="Derived_CreatedDateTime"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">[GETUTCDATE]()</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">GETUTCDATE()</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output].Columns[Derived_CreatedBy]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              length="50"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output].Columns[Derived_CreatedBy]"
+                              name="Derived_CreatedBy"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">(DT_STR,50,1252)@[System::UserName]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">(DT_STR,50,1252)@[System::UserName]</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Error Output]"
+                          description="Error Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Derived Column Error Output"
+                          synchronousInputId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}"
+                      componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="Destination {Staging Security Prices}"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[Staging].[SecurityPrice]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Connections[OleDbConnection]"
+                          connectionManagerID="{E2880A79-FC14-414C-B72E-D144E9D8BE62}:external"
+                          connectionManagerRefId="Project.ConnectionManagers[CMD TIMDB]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Volume]"
+                              cachedDataType="decimal"
+                              cachedName="Volume"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[Volume]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Volume]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Symbol]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="4"
+                              cachedName="Symbol"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[Ticker]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Symbol]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Date]"
+                              cachedDataType="dbDate"
+                              cachedName="Date"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[ClosingDate]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Date]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Open]"
+                              cachedDataType="decimal"
+                              cachedName="Open"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[OpenPrice]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Open]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[High]"
+                              cachedDataType="decimal"
+                              cachedName="High"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[HighPrice]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[High]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Low]"
+                              cachedDataType="decimal"
+                              cachedName="Low"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[LowPrice]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Low]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Close]"
+                              cachedDataType="decimal"
+                              cachedName="Close"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[ClosePrice]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Close]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Derived_CreatedDateTime]"
+                              cachedDataType="dbTimeStamp"
+                              cachedName="Derived_CreatedDateTime"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDateTime]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output].Columns[Derived_CreatedDateTime]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[Derived_CreatedBy]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="Derived_CreatedBy"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output].Columns[Derived_CreatedBy]" />
+                            <inputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].Columns[AdjustedClose]"
+                              cachedDataType="decimal"
+                              cachedName="AdjustedClose"
+                              externalMetadataColumnId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[AdjustedClose]"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[AdjustedClose]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[Ticker]"
+                              codePage="1252"
+                              dataType="str"
+                              length="10"
+                              name="Ticker" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[ClosingDate]"
+                              dataType="dbDate"
+                              name="ClosingDate" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[OpenPrice]"
+                              dataType="numeric"
+                              name="OpenPrice"
+                              precision="18"
+                              scale="4" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[HighPrice]"
+                              dataType="numeric"
+                              name="HighPrice"
+                              precision="18"
+                              scale="4" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[LowPrice]"
+                              dataType="numeric"
+                              name="LowPrice"
+                              precision="18"
+                              scale="4" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[ClosePrice]"
+                              dataType="numeric"
+                              name="ClosePrice"
+                              precision="18"
+                              scale="4" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[Volume]"
+                              dataType="i8"
+                              name="Volume" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDateTime]"
+                              dataType="dbTimeStamp"
+                              name="CreatedDateTime" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="CreatedBy" />
+                            <externalMetadataColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input].ExternalColumns[AdjustedClose]"
+                              dataType="numeric"
+                              name="AdjustedClose"
+                              precision="18"
+                              scale="6" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}"
+                      componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+                      contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;8"
+                      description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+                      name="Script {Get Historical Stock Prices}"
+                      version="8">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Stores the source code of the component"
+                          isArray="true"
+                          name="SourceCode"
+                          state="cdata">
+                          <arrayElements
+                            arrayElementCount="30">
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
+using System.Data.OleDb;
+using Yahoo.Finance.Service;
+using Yahoo.Finance.Service.Model;
+
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    List<HistoricalData> _historicalQuotes;
+    bool _fireAgain;
+    int _sleepTimeInMs = 5000;
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+
+        string ticker = Variables.vTicker;
+
+        _historicalQuotes = new List<HistoricalData>();
+
+        YahooFinanceService yfs = new YahooFinanceService();
+
+        DateTime startdate = Variables.vStartDate;
+        DateTime enddate = Variables.vEndDate;
+        int batchsize = Variables.pBatchSize;
+
+        bool fireAgain = false;
+
+        IDTSComponentMetaData100 myMetadata;
+        myMetadata = this.ComponentMetaData;
+        myMetadata.FireInformation(0, "ASX Historical Prices", ticker, "", 0, ref fireAgain);
+
+        _historicalQuotes = yfs.HistoricalDataGet(batchsize, ticker, startdate, enddate);
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+    }
+
+    public override void CreateNewOutputRows()
+    {
+        /*
+          Add rows by calling the AddRow method on the member variable named "<Output Name>Buffer".
+          For example, call MyOutputBuffer.AddRow() if your output was named "MyOutput".
+        */
+
+        if (_historicalQuotes != null)
+        {
+            foreach (HistoricalData historicalData in _historicalQuotes)
+            {
+                HistoricalPriceOutPutBuffer.AddRow();
+                HistoricalPriceOutPutBuffer.Symbol = historicalData.Symbol;
+                HistoricalPriceOutPutBuffer.Date = historicalData.Date;
+                HistoricalPriceOutPutBuffer.Open = historicalData.Open;
+                HistoricalPriceOutPutBuffer.Close = historicalData.Close;
+                HistoricalPriceOutPutBuffer.High = historicalData.High;
+                HistoricalPriceOutPutBuffer.Low = historicalData.Low;
+                HistoricalPriceOutPutBuffer.Volume = historicalData.Volume;
+                HistoricalPriceOutPutBuffer.AdjustedClose = historicalData.AdjustedClose;
+            }
+        }
+    }
+
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class HistoricalPriceOutPutBuffer: ScriptBuffer
+
+{
+    public HistoricalPriceOutPutBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public DateTime Date
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool Date_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal Open
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool Open_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal High
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool High_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal Low
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool Low_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal Close
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool Close_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal Volume
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool Volume_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal AdjustedClose
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool AdjustedClose_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String Symbol
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool Symbol_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public HistoricalPriceOutPutBuffer HistoricalPriceOutPutBuffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != HistoricalPriceOutPutBuffer)
+        {
+            HistoricalPriceOutPutBuffer.SetEndOfRowset();
+            HistoricalPriceOutPutBuffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"HistoricalPriceOutPut"))
+            {
+                HistoricalPriceOutPutBuffer = new HistoricalPriceOutPutBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public Int32 pBatchSize
+    {
+        get
+        {
+            return (Int32)(ParentComponent.ReadOnlyVariables["pBatchSize"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public DateTime vEndDate
+    {
+        get
+        {
+            return (DateTime)(ParentComponent.ReadOnlyVariables["vEndDate"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public DateTime vStartDate
+    {
+        get
+        {
+            return (DateTime)(ParentComponent.ReadOnlyVariables["vStartDate"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String vTicker
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["vTicker"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties.Settings.get_Default():SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties.Sett" +
+    "ings")]
+
+namespace SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[SC_218f071ca97e4ac5ad98fdb81abe3f61.csproj]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B3432934-C784-4070-A75D-A9F2E946C9BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_218f071ca97e4ac5ad98fdb81abe3f61</RootNamespace>
+    <AssemblyName>SC_218f071ca97e4ac5ad98fdb81abe3f61</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\timothy\Google Drive\Trading\Main\YahooAPITest\packages\Newtonsoft.Json.6.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+    <Reference Include="Yahoo.Finance.Service">
+      <HintPath>C:\Users\timothy\Google Drive\Trading\Main\Yahoo.Finance.Service\Yahoo.Finance.Service\bin\Release\Yahoo.Finance.Service.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="devenv.exe" DebugInfoCommandLine="/vstaHostDebugUri:&quot;vstadebuga210abbc-cff2-46a1-b362-b4252ddd6425/a737055c-e4e1-4d1f-a5a0-58ac50a2e7ed&quot;" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Project]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>SC_218f071ca97e4ac5ad98fdb81abe3f61</msb:CodeName>
+		<msb:DisplayName>SC_218f071ca97e4ac5ad98fdb81abe3f61</msb:DisplayName>
+		<msb:ProjectId>{81A51B87-DCE4-4371-B8CB-8C6A0622C4BF}</msb:ProjectId>
+		<msb:Language>msBuild</msb:Language>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_218f071ca97e4ac5ad98fdb81abe3f61.csproj"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_218f071ca97e4ac5ad98fdb81abe3f61")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_218f071ca97e4ac5ad98fdb81abe3f61")]
+[assembly: AssemblyCopyright("Copyright @  2015")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_218f071ca97e4ac5ad98fdb81abe3f61.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          description="Stores the binary representation of the component"
+                          isArray="true"
+                          name="BinaryCode"
+                          state="cdata">
+                          <arrayElements
+                            arrayElementCount="2">
+                            <arrayElement
+                              dataType="System.String"><![CDATA[SC_218f071ca97e4ac5ad98fdb81abe3f61.dll]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAD3qNVcAAAAAAAAAAOAAAiELAQsAACAAAAAGAAAAAAAAPj4A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAOw9AABPAAAAAEAAAAAEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAARB4AAAAgAAAAIAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAAAEAAAAQAAAAAQAAAAiAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAJgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAg
+PgAAAAAAAEgAAAACAAUAsCUAADwYAAABAAAAAAAAAPgkAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4CKA0AAAoCAnMeAAAGfQEAAAQCAnMfAAAGfQIAAAQqBipu
+AnsDAAAELBICewMAAARvHAAABgIUfQMAAAQqAAATMAUASQAAAAEAABEWCisuBAaUDgRyAQAAcCgO
+AAAKMxkCBQaaAgQGlCgPAAAKDgRzCgAABn0DAAAEBhdYCgYDMs4CbwUAAAYCbwIAAAYCKAMAAAYq
+BioAEzAHAHsAAAACAAARAigRAAAKAnsCAAAEbyMAAAYKAnMSAAAKfQQAAARzEwAACgsCewIAAARv
+IgAABgwCewIAAARvIQAABg0CewIAAARvIAAABhMEFhMFAigUAAAKEwYRBhZyLQAAcAZyWQAAcBYS
+BW8VAAAKAgcRBAYICW8WAAAKfQQAAAQqHgIoFwAACioAGzACANkAAAADAAARAnsEAAAEOc0AAAAC
+ewQAAARvGAAACgs4oAAAABIBKBkAAAoKAnsDAAAEbxsAAAYCewMAAAQGbxoAAApvGQAABgJ7AwAA
+BAZvGwAACm8LAAAGAnsDAAAEBm8cAAAKbw0AAAYCewMAAAQGbx0AAApvEwAABgJ7AwAABAZvHgAA
+Cm8PAAAGAnsDAAAEBm8fAAAKbxEAAAYCewMAAAQGbyAAAAooIQAACm8VAAAGAnsDAAAEBm8iAAAK
+bxcAAAYSASgjAAAKOlT////eDhIB/hYCAAAbbyQAAArcKgAAAAEQAAACABcAs8oADgAAAABKAiCI
+EwAAfQYAAAQCKAEAAAYqKgIDBAUoJQAACio6AhYDjAkAAAEoJgAACipaAywIAhYoJwAACipyWwAA
+cHMoAAAKejoCFwOMCgAAASgmAAAKKloDLAgCFygnAAAKKnJbAABwcygAAAp6OgIYA4wKAAABKCYA
+AAoqWgMsCAIYKCcAAAoqclsAAHBzKAAACno6AhkDjAoAAAEoJgAACipaAywIAhkoJwAACipyWwAA
+cHMoAAAKejoCGgOMCgAAASgmAAAKKloDLAgCGignAAAKKnJbAABwcygAAAp6OgIbA4wKAAABKCYA
+AAoqWgMsCAIbKCcAAAoqclsAAHBzKAAACno6AhwDjAoAAAEoJgAACipaAywIAhwoJwAACipyWwAA
+cHMoAAAKeiYCHQMoJgAACipaAywIAh0oJwAACipyWwAAcHMoAAAKeh4CKCkAAAoqHgIoKgAACioe
+AigrAAAKKjoCKCwAAAoCA30HAAAEKjoCKCwAAAoCA30IAAAEKpYCewgAAARvLQAACnL4AABwby4A
+AAooLwAACm8wAAAKpSMAAAEqlgJ7CAAABG8tAAAKcg4BAHBvLgAACigvAAAKbzAAAAqlCQAAASqW
+AnsIAAAEby0AAApyIAEAcG8uAAAKKC8AAApvMAAACqUJAAABKpYCewgAAARvLQAACnI2AQBwby4A
+AAooLwAACm8wAAAKdCQAAAEqHgIoLAAACioAEzACAC0AAAAEAAARfgkAAAQtIHJGAQBw0AcAAAIo
+MgAACm8zAAAKczQAAAoKBoAJAAAEfgkAAAQqGn4KAAAEKh4CgAoAAAQqGn4LAAAEKi5zKQAABoAL
+AAAEKh4CKDcAAAoqAAAAAAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3Vy
+Y2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVi
+bGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNv
+dXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkA
+AAAABQBsAAAAiAgAACN+AAD0CAAAOAsAACNTdHJpbmdzAAAAACwUAAC4AQAAI1VTAOQVAAAQAAAA
+I0dVSUQAAAD0FQAASAIAACNCbG9iAAAAAAAAAAIAAAFXFaIJCQEAAAD6JTMAFgAAAQAAACsAAAAI
+AAAACwAAACoAAAAaAAAANwAAAA8AAAAEAAAABAAAABcAAAAYAAAAAgAAAAEAAAAHAAAAAQAAAAAA
+CgABAAAAAAAGAP0A3AAGAA0B3AAKACoBIwEOAEYBMQESAKcB3AAGALYB3AAKAP8B5AEWADgCHAIK
+AIoCIwEKAKwCIwEKAMAErwQKAPEE3AQKAM4FtAUKAPkF5wUKABAG5wUKAC0G5wUKAEwG5wUKAGUG
+5wUKAH4G5wUKAJkG5wUKALQG5wUKAM0G5wUKAAYH5gYKACYH5gYGAIUH3AAWAKwHBgIaAA0I5Acf
+AF4IAAAKAO0IIwEKABIJIwEeAHcJTwkeAJ4JTwkHALcJAAAeAOcJTwkKABMKIwEKABkKIwEKADMK
+IAoKAFAKIwEKAFUKIwEKAHkK5wUOAKUKjwoOAL4KjwoKANMK5gYAAAAAAQAAAAAAAQABAAEAEAAy
+AAAABQABAAEAAQAQAEAAAAAIAAQABgABABAASwAAAAkABwAKAAEAEABnAAAADQAHAB4AAQAQAHMA
+AAANAAgAHwAAABAAfQCHAA0ACQAkAAABEAC2AIcAEQALACgABgBnABMABgBzABcABgBLAB8AAQBH
+AjgAAQBZAkAAAQBkAkMAAQBBBHwAAQBBBHwAEQDQBJcAEQD9BJsAEQBBBbkAUCAAAAAAhhheARsA
+AQBwIAAAAADGAWQBGwABAHIgAAAAAIEAcgEbAAEAkCAAAAAAxgDEASMAAQDlIAAAAADGAdABGwAF
+AOggAAAAAMYAcwIbAAUAbyEAAAAAxgB+AhsABQB4IQAAAADGANABGwAFAHAiAAAAAIYYXgEbAAUA
+gyIAAAAAhhheAUYABQCOIgAAAACGCJMCUAAIAJ0iAAAAAIYInAJWAAkAtCIAAAAAhgi0AlsACgDD
+IgAAAACGCL0CVgALANoiAAAAAIYIzQJbAAwA6SIAAAAAhgjWAlYADQAAIwAAAACGCOYCWwAOAA8j
+AAAAAIYI7gJWAA8AJiMAAAAAhgj9AlsAEAA1IwAAAACGCAcDVgARAEwjAAAAAIYIGANbABIAWyMA
+AAAAhggjA1YAEwByIwAAAACGCDUDWwAUAIEjAAAAAIYIRwNWABUAmCMAAAAAhghgA2EAFgCiIwAA
+AACGCGsDVgAXALkjAAAAAIYAfQMbABgAwSMAAAAAhgCEAxsAGADJIwAAAACGAJMDZgAYANEjAAAA
+AIYYXgGAABgA4CMAAAAAhhheAYAAGQDvIwAAAACGCFEEhgAaABUkAAAAAIYIYASKABoAOyQAAAAA
+hghtBIoAGgBhJAAAAACGCHwEjwAaAIckAAAAAIMYXgEbABoAkCQAAAAAkwgNBZ8AGgDJJAAAAACT
+CCEFpAAaANAkAAAAAJMILQWpABoA2CQAAAAAlghRBb0AGwDrJAAAAACGGF4BGwAbAN8kAAAAAJEY
+7gqMARsAAAABAGUFAAACAG0FAAADAHcFAAAEAH8FAAABAIkFAAACAJAFAAADAH8FAAABAKQFAAAB
+AKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQF
+AAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKQFAAABAKoFAAABAKoFAAABAKQFaQBeAWEAcQBe
+AWEAeQBeAWEAgQBeAWEAiQBeAWEAkQBeAWEAmQBeAWEAoQBeAWEAqQBeAWEAsQBeAWEAuQBeAccA
+wQBeARsACQBeARsACQBoB8wACQB0B9MAyQBeARsACQBzAhsADABeARsA0QBeARsACQAmCOkA2QA8
+CO4A0QBMCPkACQB+AhsADABpCBYBFAB3CCYBQQCDCI8AQQCOCIoAQQCXCCsBQQCgCCsBQQCqCCsB
+QQCzCCsBQQC7CIYAUQDGCDABQQDSCCsBFADkCGYA6QD5CBsAEQBeAUYAEQABCUEBEQAKCccA8QBe
+AWEAEQB9AxsAEQCEAxsAEQCTA2YAGQBeARsACQCICUcB+QCuCUwBCQDSCVMBAQH/CVkBKQFeARsA
+MQFnCmABMQGCCmkBWQBeAW8BSQFeAXwBWQFeARsAIQBeARsALgAbAAECLgBjACcCLgALAJABLgAT
+ANgBLgAjAAECLgArAAECLgAzANgBLgA7AAcCLgBDAAECLgBbAB4CYwCDAN0A4wCLAd0AYQGzAd0A
+qQKrAYMByQKrAYMB2QAIATYBdwEEAAEABgARAAcAFQAIABcAAACfA2oAAACkA28AAACwA3MAAAC1
+A28AAADBA3MAAADGA28AAADSA3MAAADWA28AAADhA3MAAADnA28AAAD0A3MAAAD7A28AAAAJBHMA
+AAAXBG8AAAAsBHgAAAAzBG8AAACIBJMAAACTBGoAAACcBGoAAACnBHgAAADABK8AAAA5BbQAAABd
+BcIAAQALAAMAAQAMAAUAAQANAAcAAQAOAAkAAQAPAAsAAQAQAA0AAQARAA8AAQASABEAAQATABMA
+AQAUABUAAQAVABcAAQAWABkAAQAXABsAAQAYAB0AAQAZAB8AAQAaACEAAgAgACMAAgAhACUAAgAi
+ACcAAgAjACkAAgAlACsAAgAmAC0AAQAnAC0AAgAoAC8A4gAfAQSAAAABAAAAWhcuBgAAAAAAAEQH
+AAALAAAAAAAAAAAAAAABAL8AAAAAAAQAAAAAAAAAAAAAAAoAGgEAAAAABAAAAAAAAAAAAAAACgAj
+AQAAAAALAAAAAAAAAAAAAAABAIYBAAAAAAEAAAAAAAAAAAAAAC8ABgIAAAAACwAAAAAAAAAAAAAA
+AQDABwAAAAALAAAAAAAAAAAAAAABACwJAAAAAAAAAAABAAAA9QoAAAAAADxNb2R1bGU+AFNDXzIx
+OGYwNzFjYTk3ZTRhYzVhZDk4ZmRiODFhYmUzZjYxLmRsbABVc2VyQ29tcG9uZW50AFNjcmlwdE1h
+aW4ASGlzdG9yaWNhbFByaWNlT3V0UHV0QnVmZmVyAENvbm5lY3Rpb25zAFZhcmlhYmxlcwBSZXNv
+dXJjZXMAU0NfMjE4ZjA3MWNhOTdlNGFjNWFkOThmZGI4MWFiZTNmNjEuUHJvcGVydGllcwBTZXR0
+aW5ncwBNaWNyb3NvZnQuU3FsU2VydmVyLlR4U2NyaXB0AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRz
+LlBpcGVsaW5lAFNjcmlwdENvbXBvbmVudABTY3JpcHRCdWZmZXIAbXNjb3JsaWIAU3lzdGVtAE9i
+amVjdABTeXN0ZW0uQ29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQAuY3RvcgBG
+aW5pc2hPdXRwdXRzAE1hcmtPdXRwdXRzRmluaXNoZWQATWljcm9zb2Z0LlNxbFNlcnZlci5QaXBl
+bGluZUhvc3QAUGlwZWxpbmVCdWZmZXIAT3V0cHV0TmFtZU1hcABQcmltZU91dHB1dABDcmVhdGVO
+ZXdPdXRwdXRSb3dzAFN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljAExpc3RgMQBZYWhvby5GaW5h
+bmNlLlNlcnZpY2UAWWFob28uRmluYW5jZS5TZXJ2aWNlLk1vZGVsAEhpc3RvcmljYWxEYXRhAF9o
+aXN0b3JpY2FsUXVvdGVzAF9maXJlQWdhaW4AX3NsZWVwVGltZUluTXMAUHJlRXhlY3V0ZQBQb3N0
+RXhlY3V0ZQBEYXRlVGltZQBzZXRfRGF0ZQBzZXRfRGF0ZV9Jc051bGwARGVjaW1hbABzZXRfT3Bl
+bgBzZXRfT3Blbl9Jc051bGwAc2V0X0hpZ2gAc2V0X0hpZ2hfSXNOdWxsAHNldF9Mb3cAc2V0X0xv
+d19Jc051bGwAc2V0X0Nsb3NlAHNldF9DbG9zZV9Jc051bGwAc2V0X1ZvbHVtZQBzZXRfVm9sdW1l
+X0lzTnVsbABzZXRfQWRqdXN0ZWRDbG9zZQBzZXRfQWRqdXN0ZWRDbG9zZV9Jc051bGwAc2V0X1N5
+bWJvbABzZXRfU3ltYm9sX0lzTnVsbABBZGRSb3cAU2V0RW5kT2ZSb3dzZXQARW5kT2ZSb3dzZXQA
+RGF0ZQBEYXRlX0lzTnVsbABPcGVuAE9wZW5fSXNOdWxsAEhpZ2gASGlnaF9Jc051bGwATG93AExv
+d19Jc051bGwAQ2xvc2UAQ2xvc2VfSXNOdWxsAFZvbHVtZQBWb2x1bWVfSXNOdWxsAEFkanVzdGVk
+Q2xvc2UAQWRqdXN0ZWRDbG9zZV9Jc051bGwAU3ltYm9sAFN5bWJvbF9Jc051bGwAUGFyZW50Q29t
+cG9uZW50AGdldF9wQmF0Y2hTaXplAGdldF92RW5kRGF0ZQBnZXRfdlN0YXJ0RGF0ZQBnZXRfdlRp
+Y2tlcgBwQmF0Y2hTaXplAHZFbmREYXRlAHZTdGFydERhdGUAdlRpY2tlcgBTeXN0ZW0uUmVzb3Vy
+Y2VzAFJlc291cmNlTWFuYWdlcgByZXNvdXJjZU1hbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBDdWx0
+dXJlSW5mbwByZXNvdXJjZUN1bHR1cmUAZ2V0X1Jlc291cmNlTWFuYWdlcgBnZXRfQ3VsdHVyZQBz
+ZXRfQ3VsdHVyZQBDdWx0dXJlAGRlZmF1bHRJbnN0YW5jZQBnZXRfRGVmYXVsdABEZWZhdWx0AE91
+dHB1dHMAT3V0cHV0SURzAEJ1ZmZlcnMAT3V0cHV0TWFwAEJ1ZmZlcgBCdWZmZXJDb2x1bW5JbmRl
+eGVzAHZhbHVlAENvbXBvbmVudABTeXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAFRhcmdldEZyYW1l
+d29ya0F0dHJpYnV0ZQBTeXN0ZW0uUmVmbGVjdGlvbgBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFz
+c2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRl
+AEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRyaWJ1dGUAQXNzZW1i
+bHlDb3B5cmlnaHRBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAQXNzZW1ibHlD
+dWx0dXJlQXR0cmlidXRlAEFzc2VtYmx5VmVyc2lvbkF0dHJpYnV0ZQBTeXN0ZW0uUnVudGltZS5D
+b21waWxlclNlcnZpY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAUnVudGltZUNv
+bXBhdGliaWxpdHlBdHRyaWJ1dGUAU0NfMjE4ZjA3MWNhOTdlNGFjNWFkOThmZGI4MWFiZTNmNjEA
+R2V0T3V0cHV0SUQAR2V0Q29sdW1uSW5kZXhlcwBTU0lTU2NyaXB0Q29tcG9uZW50RW50cnlQb2lu
+dEF0dHJpYnV0ZQBZYWhvb0ZpbmFuY2VTZXJ2aWNlAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUGlw
+ZWxpbmVXcmFwAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lLldyYXBwZXIASURUU0Nv
+bXBvbmVudE1ldGFEYXRhMTAwAGdldF9Db21wb25lbnRNZXRhRGF0YQBGaXJlSW5mb3JtYXRpb24A
+SGlzdG9yaWNhbERhdGFHZXQARW51bWVyYXRvcgBHZXRFbnVtZXJhdG9yAGdldF9DdXJyZW50AGdl
+dF9TeW1ib2wAZ2V0X0RhdGUAZ2V0X09wZW4AZ2V0X0Nsb3NlAGdldF9IaWdoAGdldF9Mb3cAZ2V0
+X1ZvbHVtZQBvcF9JbXBsaWNpdABnZXRfQWRqdXN0ZWRDbG9zZQBNb3ZlTmV4dABJRGlzcG9zYWJs
+ZQBEaXNwb3NlAHNldF9JdGVtAFNldE51bGwASW52YWxpZE9wZXJhdGlvbkV4Y2VwdGlvbgBNaWNy
+b3NvZnQuU3FsU2VydmVyLkRUU1J1bnRpbWVXcmFwAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1
+bnRpbWUuV3JhcHBlcgBJRFRTVmFyaWFibGVzMTAwAGdldF9SZWFkT25seVZhcmlhYmxlcwBJRFRT
+VmFyaWFibGUxMDAAZ2V0X0l0ZW0AU2NyaXB0Q29tcG9uZW50RXZhbENvbnRleHQAZ2V0X0V2YWx1
+YXRvckNvbnRleHQASURUU0V2YWx1YXRvckNvbnRleHQxMDAAR2V0VmFsdWVXaXRoQ29udGV4dABJ
+bnQzMgBTdHJpbmcAU3lzdGVtLkRpYWdub3N0aWNzAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRyaWJ1
+dGUAVHlwZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBBc3NlbWJseQBnZXRf
+QXNzZW1ibHkAU3lzdGVtLkNvbXBvbmVudE1vZGVsAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBF
+ZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQAuY2N0b3IAU0Nf
+MjE4ZjA3MWNhOTdlNGFjNWFkOThmZGI4MWFiZTNmNjEuUHJvcGVydGllcy5SZXNvdXJjZXMucmVz
+b3VyY2VzAAArSABpAHMAdABvAHIAaQBjAGEAbABQAHIAaQBjAGUATwB1AHQAUAB1AHQAACtBAFMA
+WAAgAEgAaQBzAHQAbwByAGkAYwBhAGwAIABQAHIAaQBjAGUAcwAAAQCAm0kAcwBOAHUAbABsACAA
+cAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAgAHQAbwAgAEYAYQBs
+AHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAAdABoAGUAIABjAG8A
+bAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAAFXAAQgBhAHQAYwBoAFMAaQB6AGUAABF2AEUAbgBk
+AEQAYQB0AGUAABV2AFMAdABhAHIAdABEAGEAdABlAAAPdgBUAGkAYwBrAGUAcgAAcVMAQwBfADIA
+MQA4AGYAMAA3ADEAYwBhADkANwBlADQAYQBjADUAYQBkADkAOABmAGQAYgA4ADEAYQBiAGUAMwBm
+ADYAMQAuAFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAYY8bCWKP0k2D
+4ZR+kNCowwAIiYRdzYCAzJEIt3pcVhk04IkDBhIUAwYSGAMgAAEDBhIQCyAEAQgdCB0SFRIZCJVw
+QMxrHlCmBwYVEh0BEiECBgICBggJIAMBEhUdCBIZBSABARElBCABAQIFIAEBESkEIAEBDgMgAAIE
+KAARJQMoAAIEKAARKQMoAA4DBhIFBSABARIFAyAACAQgABElAyAADgMoAAgDBhItAwYSMQQAABIt
+BAAAEjEFAAEBEjEECAASLQQIABIxAwYSIAQAABIgBAgAEiAEIAEBCAYAAggSGQ4FIAEdCAgDBwEI
+BAEAAAAGFRIdARIhBCAAEm0KIAYBCA4ODggQAg4gBBUSHQESIQgOESURJQ0HBw4SaRElESUIAhJt
+CCAAFRFxARMABhURcQESIQQgABMABCAAESkFAAERKQgKBwISIRURcQESIQUgAgEIHAQgABJ9BiAB
+EoCBHAUAABKAhQYgARwSgIkIAAESgJkRgJ0FIAASgKEHIAIBDhKAoQQHARItBiABARGAqQgBAAIA
+AAAAAAMAAAFHAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjABAFQOFEZyYW1ld29ya0Rpc3Bs
+YXlOYW1lEC5ORVQgRnJhbWV3b3JrIDQoAQAjU0NfMjE4ZjA3MWNhOTdlNGFjNWFkOThmZGI4MWFi
+ZTNmNjEAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAxNQAACAEACAAAAAAAHgEAAQBUAhZXcmFw
+Tm9uRXhjZXB0aW9uVGhyb3dzAQAAFD4AAAAAAAAAAAAALj4AAAAgAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAACA+AAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQ
+AAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhA
+AACkAwAAAAAAAAAAAACkAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv
+/gAAAQAAAAEALgZaFwAAAQAuBloXPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYA
+YQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAA
+ALAEBAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAA4AIAAAEAMAAwADAAMAAwADQA
+YgAwAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAQwBfADIAMQA4
+AGYAMAA3ADEAYwBhADkANwBlADQAYQBjADUAYQBkADkAOABmAGQAYgA4ADEAYQBiAGUAMwBmADYA
+MQAAADwADgABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgA1ADkANwA4AC4AMQA1
+ADgAMgAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBDAF8AMgAxADgAZgAwADcA
+MQBjAGEAOQA3AGUANABhAGMANQBhAGQAOQA4AGYAZABiADgAMQBhAGIAZQAzAGYANgAxAC4AZABs
+AGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgA
+dAAgAEAAIAAgADIAMAAxADUAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBl
+AAAAUwBDAF8AMgAxADgAZgAwADcAMQBjAGEAOQA3AGUANABhAGMANQBhAGQAOQA4AGYAZABiADgA
+MQBhAGIAZQAzAGYANgAxAC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAA
+AFMAQwBfADIAMQA4AGYAMAA3ADEAYwBhADkANwBlADQAYQBjADUAYQBkADkAOABmAGQAYgA4ADEA
+YQBiAGUAMwBmADYAMQAAAEAADgABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAw
+AC4ANQA5ADcAOAAuADEANQA4ADIAAABEAA4AAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkA
+bwBuAAAAMQAuADAALgA1ADkANwA4AC4AMQA1ADgAMgAAAAAAAAAAMAAADAAAAEA+AAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                          name="VSTAProjectName"
+                          typeConverter="NOTBROWSABLE">SC_218f071ca97e4ac5ad98fdb81abe3f61</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the programming language used by the script."
+                          name="ScriptLanguage"
+                          typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages, Microsoft.SqlServer.VSTAScriptingLib, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">CSharp</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a comma-separated list of read-only variables."
+                          name="ReadOnlyVariables"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">User::vEndDate,User::vStartDate,User::vTicker,$Package::pBatchSize</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a comma-separated list of read/write variables."
+                          name="ReadWriteVariables"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.String"
+                          description="List of breakpoints present on the script."
+                          isArray="true"
+                          name="BreakpointCollection"
+                          typeConverter="NOTBROWSABLE">
+                          <arrayElements
+                            arrayElementCount="0" />
+                        </property>
+                        <property
+                          dataType="System.String"
+                          description="Checksum to match component metedata against compiled codes."
+                          name="MetadataChecksum"
+                          typeConverter="NOTBROWSABLE">f135a92d372210d8775661c4224e8689</property>
+                        <property
+                          dataType="System.String"
+                          name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.ScriptComponentHost, Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+                      </properties>
+                      <outputs>
+                        <output
+                          refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut]"
+                          hasSideEffects="true"
+                          name="HistoricalPriceOutPut">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Date]"
+                              dataType="dbDate"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Date]"
+                              name="Date" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Open]"
+                              dataType="decimal"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Open]"
+                              name="Open" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[High]"
+                              dataType="decimal"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[High]"
+                              name="High" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Low]"
+                              dataType="decimal"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Low]"
+                              name="Low" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Close]"
+                              dataType="decimal"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Close]"
+                              name="Close" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Volume]"
+                              dataType="decimal"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Volume]"
+                              name="Volume" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[AdjustedClose]"
+                              dataType="decimal"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[AdjustedClose]"
+                              name="AdjustedClose" />
+                            <outputColumn
+                              refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Symbol]"
+                              codePage="1252"
+                              dataType="str"
+                              length="4"
+                              lineageId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut].Columns[Symbol]"
+                              name="Symbol" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}.Paths[Derived Column Output]"
+                      endId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}.Inputs[OLE DB Destination Input]"
+                      name="Derived Column Output"
+                      startId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Outputs[Derived Column Output]" />
+                    <path
+                      refId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}.Paths[SectorOutput]"
+                      endId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}.Inputs[Derived Column Input]"
+                      name="SectorOutput"
+                      startId="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}.Outputs[HistoricalPriceOutPut]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{866BA42D-2A19-4813-8897-FFD7651E720B}"
+              DTS:ObjectName="{866BA42D-2A19-4813-8897-FFD7651E720B}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::vTicker" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Set Start and End Dates\}"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3F67C6C1-4624-4C99-811D-C3BD8F06D158}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQLTask {CMD TIMDB} {Set Start and End Dates}"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{E2880A79-FC14-414C-B72E-D144E9D8BE62}"
+              SQLTask:SqlStatementSource="declare @StartDate datetime = ?;&#xA;declare @EndDate datetime = ?;&#xA;declare @MaxClosingDate datetime;&#xA;&#xA;select @MaxClosingDate = dateadd(dd, 1, max(ClosingDate))&#xA;from Market.SecurityPrice&#xA;&#xA;select case when @StartDate = '18991230' then @MaxClosingDate else @StartDate end as StartDate&#xA;&#x9;, case when @EndDate = '18991230' then dateadd(dd, 0, getdate()) else @EndDate end as EndDate"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="StartDate"
+                SQLTask:DtsVariableName="User::vStartDate" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="EndDate"
+                SQLTask:DtsVariableName="User::vEndDate" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="$Package::pStartDate"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::pEndDate"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Truncate Security Price\}"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6052114A-3054-46D2-8BB3-7D0C93FC90EE}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQLTask {CMD TIMDB} {Truncate Security Price}"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{E2880A79-FC14-414C-B72E-D144E9D8BE62}"
+              SQLTask:SqlStatementSource="truncate table Staging.SecurityPrice;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{612CDE98-8E99-4508-9B79-716562D9D861}"
+          DTS:From="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence {Extract\}\Foreach {Ticker\}" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{8870F8B9-76B2-4603-80F8-07B8544342A8}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[$Package::pTicker] == &quot;&quot;"
+          DTS:From="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Set Start and End Dates\}"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{233A2143-2B44-4349-901E-78639B3C8755}"
+          DTS:From="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Truncate Security Price\}"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Set Start and End Dates\}" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{DAA570A7-EEB3-465E-8F37-D4394B3178E2}"
+          DTS:From="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence {Extract\}\Foreach {Ticker\}" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{0B277E3D-BA13-4A1A-8B02-F2F90B715D45}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[$Package::pTicker] != &quot;&quot;"
+          DTS:From="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Set Start and End Dates\}"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}"
+          TopLeft="65,160" />
+        <NodeLayout
+          Size="223,42"
+          Id="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}"
+          TopLeft="325,158" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}"
+          TopLeft="45,11" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="317,74"
+          Size="317,117"
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}"
+          TopLeft="158,241" />
+        <NodeLayout
+          Size="316,42"
+          Id="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Set Start and End Dates\}"
+          TopLeft="133,75" />
+        <NodeLayout
+          Size="312,42"
+          Id="Package\Sequence {Extract\}\SQLTask {CMD TIMDB\} {Truncate Security Price\}"
+          TopLeft="137,13.5" />
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint]"
+          TopLeft="181.5,202">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.5,39"
+              Start="0,0"
+              End="83.5,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.2824858757062" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.2824858757062"
+                    Point2="0,23.2824858757062"
+                    Point3="4,23.2824858757062" />
+                  <mssgle:LineSegment
+                    End="79.5,23.2824858757062" />
+                  <mssgle:CubicBezierSegment
+                    Point1="79.5,23.2824858757062"
+                    Point2="83.5,23.2824858757062"
+                    Point3="83.5,27.2824858757062" />
+                  <mssgle:LineSegment
+                    End="83.5,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 1]"
+          TopLeft="239.666666666667,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-58.1666666666667,43"
+              Start="0,0"
+              End="-58.1666666666667,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.3299748110831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.3299748110831"
+                    Point2="0,17.3299748110831"
+                    Point3="-4,17.3299748110831" />
+                  <mssgle:LineSegment
+                    End="-54.1666666666667,17.3299748110831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-54.1666666666667,17.3299748110831"
+                    Point2="-58.1666666666667,17.3299748110831"
+                    Point3="-58.1666666666667,21.3299748110831" />
+                  <mssgle:LineSegment
+                    End="-58.1666666666667,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-37.0833333333333,22.3299748110831,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 2]"
+          TopLeft="449,34.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.5"
+              Start="0,0"
+              End="7.5,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,4" />
+                  <mssgle:LineSegment
+                    End="22.5,57.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,57.5"
+                    Point2="22.5,61.5"
+                    Point3="18.5,61.5" />
+                  <mssgle:LineSegment
+                    End="7.5,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 3]"
+          TopLeft="436.5,200">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-68.5,41"
+              Start="0,0"
+              End="-68.5,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.4764595103579" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.4764595103579"
+                    Point2="0,24.4764595103579"
+                    Point3="-4,24.4764595103579" />
+                  <mssgle:LineSegment
+                    End="-64.5,24.4764595103579" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-64.5,24.4764595103579"
+                    Point2="-68.5,24.4764595103579"
+                    Point3="-68.5,28.4764595103579" />
+                  <mssgle:LineSegment
+                    End="-68.5,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}.PrecedenceConstraints[Constraint 4]"
+          TopLeft="342.333333333333,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="94.1666666666667,41"
+              Start="0,0"
+              End="94.1666666666667,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5239294710327" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.5239294710327"
+                    Point2="0,16.5239294710327"
+                    Point3="4,16.5239294710327" />
+                  <mssgle:LineSegment
+                    End="90.1666666666667,16.5239294710327" />
+                  <mssgle:CubicBezierSegment
+                    Point1="90.1666666666667,16.5239294710327"
+                    Point2="94.1666666666667,16.5239294710327"
+                    Point3="94.1666666666667,20.5239294710327" />
+                  <mssgle:LineSegment
+                    End="94.1666666666667,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="39.0833333333333,21.5239294710327,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="591,413"
+          Size="591,456"
+          Id="Package\Sequence {Extract\}"
+          TopLeft="229.5,1643" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="213,42"
+          Id="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Source {ASX Companies\}"
+          TopLeft="313,171" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}\Destination {ASX Companies\}"
+          TopLeft="311,253" />
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}\Data Flow {Get All Ticker Codes\}.Paths[OLE DB Source Output]"
+          TopLeft="419.75,213">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Script {Create Row From Ticker\}"
+          TopLeft="366,150" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}\Destination {ASX Companies\}"
+          TopLeft="346,261" />
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}\Data Flow {Single Ticker Only\}.Paths[Output 0]"
+          TopLeft="482,192">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-27,69"
+              Start="0,0"
+              End="-27,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.5"
+                    Point2="0,34.5"
+                    Point3="-4,34.5" />
+                  <mssgle:LineSegment
+                    End="-23,34.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23,34.5"
+                    Point2="-27,34.5"
+                    Point3="-27,38.5" />
+                  <mssgle:LineSegment
+                    End="-27,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Script {Get Historical Stock Prices\}"
+          TopLeft="167,125" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Derived {Audit Columns\}"
+          TopLeft="181,208" />
+        <NodeLayout
+          Size="251,42"
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}"
+          TopLeft="166,288" />
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}.Paths[SectorOutput]"
+          TopLeft="287,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8,41"
+              Start="0,0"
+              End="-8,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="-4,20.5" />
+                  <mssgle:LineSegment
+                    End="-4,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4,20.5"
+                    Point2="-8,20.5"
+                    Point3="-8,24.5" />
+                  <mssgle:LineSegment
+                    End="-8,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}.Paths[Derived Column Output]"
+          TopLeft="279,250">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,38"
+              Start="0,0"
+              End="12.5,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15"
+                    Point2="0,19"
+                    Point3="4,19" />
+                  <mssgle:LineSegment
+                    End="8.5,19" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,19"
+                    Point2="12.5,19"
+                    Point3="12.5,23" />
+                  <mssgle:LineSegment
+                    End="12.5,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence {Extract\}\Foreach {Ticker\}\Data Flow {Get Historical Prices\}\Destination {Staging Security Prices\}">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

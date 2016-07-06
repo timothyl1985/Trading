@@ -1,0 +1,6 @@
+<ConnectionManager p1:ObjectName="CMD TIMDB" p1:DTSID="{E2880A79-FC14-414C-B72E-D144E9D8BE62}" p1:refId="Package.ConnectionManagers[CMD TIMDB]" p1:CreationName="OLEDB" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
+  <p1:ObjectData>
+    <DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=Localhost;Initial Catalog=TIMDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;">
+    </DTS:ConnectionManager>
+  </p1:ObjectData>
+</ConnectionManager>

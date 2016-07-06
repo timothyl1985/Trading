@@ -1,0 +1,237 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Connections>
+		<OleDbConnection Name="CMD TIMDB"
+			ConnectionString="Data Source=Localhost;Initial Catalog=TIMDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;" CreateInProject="true">
+		</OleDbConnection>
+	</Connections>
+	<ScriptProjects>
+		<#=CallBimlScript(".\\1.Script_ExtractCSVASX300.biml")#>
+		<#=CallBimlScript(".\\2.Script_ExtractCSVIndustrial.biml")#>
+		<#=CallBimlScript(".\\3.Script_ExtractCSVMiningOil.biml")#>
+		<#=CallBimlScript(".\\4.Script_BuildURLDownload.biml")#>
+		<#=CallBimlScript(".\\5.Script_DownloadCSV.biml")#>
+	</ScriptProjects>
+	<Projects>
+		<PackageProject Name="SSIS.AFR">
+			<Parameters>
+				<Parameter Name="pStartDate" DataType="DateTime">1899-12-30</Parameter>
+				<Parameter Name="pEndDate" DataType="DateTime">1899-12-30</Parameter>
+				<Parameter Name="pCSVURL" DataType="String">http://www.afr.com/Tables/Share_Tables_Weekly/YYYYMMDD/</Parameter>
+			</Parameters>
+			<!--<Packages>
+				<Package PackageName="AFRShareTable_ASX300" />
+				<Package PackageName="AFRShareTable_Industrial" />
+				<Package PackageName="AFRShareTable_MiningOil" />
+			</Packages>-->
+		</PackageProject>
+	</Projects>
+	<Packages>
+		<Package Name="AFRShareTable_ASX300" ConstraintMode="Linear" ProtectionLevel="DontSaveSensitive">
+			<Parameters>
+				<Parameter Name="pCSVFileName" DataType="String">XXtpwk.csv</Parameter>
+				<Parameter Name="pCSVFileNameDownloaded" DataType="String">ASX300_YYYYMMDD.csv</Parameter>
+				<Parameter Name="pCSVFileNamePrev" DataType="String">XXtpwkYYMMDD.csv</Parameter>
+				<Parameter Name="pStagingDirectory" DataType="String">C:\Users\timothy\Google Drive\Trading\Main\SSIS\SSIS.AFR\Staging\ASX300\</Parameter>
+				<Parameter Name="pArchiveDirectory" DataType="String">C:\Users\timothy\Google Drive\Trading\Main\SSIS\SSIS.AFR\Staging\ASX300\Archive\</Parameter>
+			</Parameters>
+			<Tasks>
+				<#=CallBimlScript(".\\6.Container_DownloadCSV.biml")#>
+				<ForEachFileLoop Name="Foreach (For Each CSV File)" Folder="C:\" FileSpecification="*.csv" RetrieveFileNameFormat="NameAndExtension" ConstraintMode="Linear">
+					<Variables>
+						<Variable Name="vFileName" DataType="String"/>
+						<Variable Name="vFileFullPath" DataType="String"/>
+					</Variables>
+					<Expressions>
+						<Expression PropertyName="Directory">@[$Package::pStagingDirectory]</Expression>
+					</Expressions>
+					<VariableMappings>
+						<VariableMapping Name="0" VariableName="User.vFileName"/>
+					</VariableMappings>
+					<Tasks>
+						<Expression Name="Expression (Build File Path)" Expression="@[User::vFileFullPath] = @[$Package::pStagingDirectory] + @[User::vFileName]"/>
+						<ExecuteSQL Name="SQLTask (CMD TIMDB) Truncate Staging Table" ConnectionName="CMD TIMDB">
+							<DirectInput>truncate table Staging.SecurityFundamental</DirectInput>
+						</ExecuteSQL>
+						<Dataflow Name="Data Flow (Load to Staging)">
+							<Transformations>
+								<ScriptComponentSource Name="Script Source (Extract CSV Fields)">
+									<ScriptComponentProjectReference ScriptComponentProjectName="Script - ASX300"/>
+								</ScriptComponentSource>
+								<DerivedColumns Name="Derived (Source ID)">
+									<Columns>
+										<Column Name ="DER_SourceID" DataType = "String" Length="1">
+											1
+										</Column>
+									</Columns>
+								</DerivedColumns>
+								<OleDbDestination Name="Destination (CMD TIMDB) Security Fundamental" ConnectionName="CMD TIMDB">
+									<InputPath OutputPathName="Derived (Source ID).Output"></InputPath>
+									<ExternalTableOutput Table="Staging.SecurityFundamental"></ExternalTableOutput>
+									<Columns>
+										<Column SourceColumn="ASXCode" TargetColumn="Ticker"  />
+										<Column SourceColumn="TradeDate" TargetColumn="TradeDate"  />
+										<Column SourceColumn="MarketCapBil" TargetColumn="MarketCapBil"  />
+										<Column SourceColumn="DPS" TargetColumn="DPS"  />
+										<Column SourceColumn="DivYield" TargetColumn="DivYield"  />
+										<Column SourceColumn="Franking" TargetColumn="FrankedStatus"  />
+										<Column SourceColumn="EPS" TargetColumn="EPS"  />
+										<Column SourceColumn="PE" TargetColumn="PE"  />
+										<Column SourceColumn="NetAssetBack" TargetColumn="NetTangibleAssets"  />
+										<Column SourceColumn="DER_SourceID" TargetColumn="SourceID"  />
+									</Columns>
+								</OleDbDestination>
+							</Transformations>
+						</Dataflow>
+						<ExecuteSQL Name="SQLTask (CMD TIMDB) Execute Merge Procedure" ConnectionName="CMD TIMDB">
+							<DirectInput>exec [Staging].[uspSecurityFundamentalMerge];</DirectInput>
+						</ExecuteSQL>
+						<FileSystem Name="File System (Archive File)" Operation="MoveFile" DelayValidation="true">
+							<VariableInput VariableName="User.vFileFullPath"/>
+							<VariableOutput VariableName="AFRShareTable_ASX300.pArchiveDirectory"/>
+						</FileSystem>
+					</Tasks>
+				</ForEachFileLoop>
+			</Tasks>
+		</Package>
+		<Package Name="AFRShareTable_Industrial" ConstraintMode="Linear" ProtectionLevel="DontSaveSensitive">
+			<Parameters>
+				<Parameter Name="pCSVFileName" DataType="String">DDiswk.csv</Parameter>
+				<Parameter Name="pCSVFileNameDownloaded" DataType="String">Industrial_YYYYMMDD.csv</Parameter>
+				<Parameter Name="pCSVFileNamePrev" DataType="String">DDiswkYYMMDD.csv</Parameter>
+				<Parameter Name="pStagingDirectory" DataType="String">C:\Users\timothy\Google Drive\Trading\Main\SSIS\SSIS.AFR\Staging\Industrial\</Parameter>
+				<Parameter Name="pArchiveDirectory" DataType="String">C:\Users\timothy\Google Drive\Trading\Main\SSIS\SSIS.AFR\Staging\Industrial\Archive\</Parameter>
+			</Parameters>
+			<Variables>
+				<Variable Name="vFileName" DataType="String"/>
+				<Variable Name="vFileFullPath" DataType="String"/>
+			</Variables>
+			<Tasks>
+				<#=CallBimlScript(".\\6.Container_DownloadCSV.biml")#>
+				<ForEachFileLoop Name="Foreach (For Each CSV File)" Folder="C:\" FileSpecification="*.csv" RetrieveFileNameFormat="NameAndExtension" ConstraintMode="Linear">
+					<Variables>
+						<Variable Name="vFileName" DataType="String"/>
+					</Variables>
+					<Expressions>
+						<Expression PropertyName="Directory">@[$Package::pStagingDirectory]</Expression>
+					</Expressions>
+					<VariableMappings>
+						<VariableMapping Name="0" VariableName="User.vFileName"/>
+					</VariableMappings>
+					<Tasks>
+						<Expression Name="Expression (Build File Path)" Expression="@[User::vFileFullPath] = @[$Package::pStagingDirectory] + @[User::vFileName]"/>
+						<ExecuteSQL Name="SQLTask (CMD TIMDB) Truncate Staging Table" ConnectionName="CMD TIMDB">
+							<DirectInput>truncate table Staging.SecurityFundamental</DirectInput>
+						</ExecuteSQL>
+						<Dataflow Name="Data Flow (Load to Staging)">
+							<Transformations>
+								<ScriptComponentSource Name="Script Source (Extract CSV Fields)">
+									<ScriptComponentProjectReference ScriptComponentProjectName="Script - Industrial"/>
+								</ScriptComponentSource>
+								<DerivedColumns Name="Derived (Source ID)">
+									<Columns>
+										<Column Name ="DER_SourceID" DataType = "String" Length="1">
+											1
+										</Column>
+									</Columns>
+								</DerivedColumns>
+								<OleDbDestination Name="Destination (CMD TIMDB) Security Fundamental" ConnectionName="CMD TIMDB">
+									<InputPath OutputPathName="Derived (Source ID).Output"></InputPath>
+									<ExternalTableOutput Table="Staging.SecurityFundamental"></ExternalTableOutput>
+									<Columns>
+										<Column SourceColumn="ASXCode" TargetColumn="Ticker"  />
+										<Column SourceColumn="TradeDate" TargetColumn="TradeDate"  />
+										<Column SourceColumn="MarketCapBil" TargetColumn="MarketCapBil"  />
+										<Column SourceColumn="DPS" TargetColumn="DPS"  />
+										<Column SourceColumn="DivYield" TargetColumn="DivYield"  />
+										<Column SourceColumn="Franking" TargetColumn="FrankedStatus"  />
+										<Column SourceColumn="EPS" TargetColumn="EPS"  />
+										<Column SourceColumn="PE" TargetColumn="PE"  />
+										<Column SourceColumn="NetAssetBack" TargetColumn="NetTangibleAssets"  />
+										<Column SourceColumn="DER_SourceID" TargetColumn="SourceID"  />
+									</Columns>
+								</OleDbDestination>
+							</Transformations>
+						</Dataflow>
+						<ExecuteSQL Name="SQLTask (CMD TIMDB) Execute Merge Procedure" ConnectionName="CMD TIMDB">
+							<DirectInput>exec [Staging].[uspSecurityFundamentalMerge];</DirectInput>
+						</ExecuteSQL>
+						<FileSystem Name="File System (Archive File)" Operation="MoveFile" DelayValidation="true">
+							<VariableInput VariableName="User.vFileFullPath"/>
+							<VariableOutput VariableName="AFRShareTable_ASX300.pArchiveDirectory"/>
+						</FileSystem>
+					</Tasks>
+				</ForEachFileLoop>
+			</Tasks>
+		</Package>
+		<Package Name="AFRShareTable_MiningOil" ConstraintMode="Linear" ProtectionLevel="DontSaveSensitive">
+			<Parameters>
+				<Parameter Name="pCSVFileName" DataType="String">EEimwk.csv</Parameter>
+				<Parameter Name="pCSVFileNameDownloaded" DataType="String">MiningOil_YYYYMMDD.csv</Parameter>
+				<Parameter Name="pCSVFileNamePrev" DataType="String">EEimwkYYMMDD.csv</Parameter>
+				<Parameter Name="pStagingDirectory" DataType="String">C:\Users\timothy\Google Drive\Trading\Main\SSIS\SSIS.AFR\Staging\MiningOil\</Parameter>
+				<Parameter Name="pArchiveDirectory" DataType="String">C:\Users\timothy\Google Drive\Trading\Main\SSIS\SSIS.AFR\Staging\MiningOil\Archive\</Parameter>
+			</Parameters>
+			<Variables>
+				<Variable Name="vFileName" DataType="String"/>
+				<Variable Name="vFileFullPath" DataType="String"/>
+			</Variables>
+			<Tasks>
+				<#=CallBimlScript(".\\6.Container_DownloadCSV.biml")#>
+				<ForEachFileLoop Name="Foreach (For Each CSV File)" Folder="C:\" FileSpecification="*.csv" RetrieveFileNameFormat="NameAndExtension" ConstraintMode="Linear">
+					<Variables>
+						<Variable Name="vFileName" DataType="String"/>
+					</Variables>
+					<Expressions>
+						<Expression PropertyName="Directory">@[$Package::pStagingDirectory]</Expression>
+					</Expressions>
+					<VariableMappings>
+						<VariableMapping Name="0" VariableName="User.vFileName"/>
+					</VariableMappings>
+					<Tasks>
+						<Expression Name="Expression (Build File Path)" Expression="@[User::vFileFullPath] = @[$Package::pStagingDirectory] + @[User::vFileName]"/>
+						<ExecuteSQL Name="SQLTask (CMD TIMDB) Truncate Staging Table" ConnectionName="CMD TIMDB">
+							<DirectInput>truncate table Staging.SecurityFundamental</DirectInput>
+						</ExecuteSQL>
+						<Dataflow Name="Data Flow (Load to Staging)">
+							<Transformations>
+								<ScriptComponentSource Name="Script Source (Extract CSV Fields)">
+									<ScriptComponentProjectReference ScriptComponentProjectName="Script - Mining Oil"/>
+								</ScriptComponentSource>
+								<DerivedColumns Name="Derived (Source ID)">
+									<Columns>
+										<Column Name ="DER_SourceID" DataType = "String" Length="1">
+											1
+										</Column>
+									</Columns>
+								</DerivedColumns>
+								<OleDbDestination Name="Destination (CMD TIMDB) Security Fundamental" ConnectionName="CMD TIMDB">
+									<InputPath OutputPathName="Derived (Source ID).Output"></InputPath>
+									<ExternalTableOutput Table="Staging.SecurityFundamental"></ExternalTableOutput>
+									<Columns>
+										<Column SourceColumn="ASXCode" TargetColumn="Ticker"  />
+										<Column SourceColumn="TradeDate" TargetColumn="TradeDate"  />
+										<Column SourceColumn="MarketCapBil" TargetColumn="MarketCapBil"  />
+										<Column SourceColumn="DPS" TargetColumn="DPS"  />
+										<Column SourceColumn="DivYield" TargetColumn="DivYield"  />
+										<Column SourceColumn="Franking" TargetColumn="FrankedStatus"  />
+										<Column SourceColumn="EPS" TargetColumn="EPS"  />
+										<Column SourceColumn="PE" TargetColumn="PE"  />
+										<Column SourceColumn="NetAssetBack" TargetColumn="NetTangibleAssets"  />
+										<Column SourceColumn="DER_SourceID" TargetColumn="SourceID"  />
+									</Columns>
+								</OleDbDestination>
+							</Transformations>
+						</Dataflow>
+						<ExecuteSQL Name="SQLTask (CMD TIMDB) Execute Merge Procedure" ConnectionName="CMD TIMDB">
+							<DirectInput>exec [Staging].[uspSecurityFundamentalMerge];</DirectInput>
+						</ExecuteSQL>
+						<FileSystem Name="File System (Archive File)" Operation="MoveFile" DelayValidation="true">
+							<VariableInput VariableName="User.vFileFullPath"/>
+							<VariableOutput VariableName="AFRShareTable_ASX300.pArchiveDirectory"/>
+						</FileSystem>
+					</Tasks>
+				</ForEachFileLoop>
+			</Tasks>
+		</Package>
+	</Packages>
+</Biml>

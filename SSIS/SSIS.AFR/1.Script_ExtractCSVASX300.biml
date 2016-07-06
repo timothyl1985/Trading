@@ -1,0 +1,188 @@
+<ScriptComponentProject ProjectCoreName="SC_2bca370105ff4883a705860bac68cfba" Name="Script - ASX300">
+	<AssemblyReferences>
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.DTSPipelineWrap.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.DTSRuntimeWrap.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.PipelineHost.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.TxScript.dll" />
+		<AssemblyReference AssemblyPath="System.dll" />
+		<AssemblyReference AssemblyPath="System.Data.dll" />
+		<AssemblyReference AssemblyPath="System.Xml.dll" />
+		<AssemblyReference AssemblyPath="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL, Custom=null" />
+	</AssemblyReferences>
+	<OutputBuffers>
+		<OutputBuffer Name="Output0" IsSynchronous="false">
+			<Columns>
+				<Column Name="ASXCode" DataType="AnsiString" Length="10"></Column>
+				<Column Name="CompanyName" DataType="AnsiString" Length="50"></Column>
+				<Column Name="MarketCapBil" DataType="Decimal" Precision="18" Scale="4"></Column>
+				<Column Name="DPS" DataType="Decimal" Precision="18" Scale="4"></Column>
+				<Column Name="Franking" DataType="AnsiString" Length="1"></Column>
+				<Column Name="EPS" DataType="Decimal" Precision="18" Scale="4"></Column>
+				<Column Name="NetAssetBack" DataType="Decimal" Precision="18" Scale="4"></Column>
+				<Column Name="TradeDate" DataType="Date"></Column>
+				<Column Name="PE" DataType="Decimal" Precision="18" Scale="4"></Column>
+				<Column Name="DivYield" DataType="Decimal" Precision="18" Scale="4"></Column>
+			</Columns>
+		</OutputBuffer>
+	</OutputBuffers>
+	<ReadOnlyVariables>
+		<Variable VariableName="vFileFullPath" Namespace="User" DataType="String"></Variable>
+	</ReadOnlyVariables>
+	<Files>
+		<File Path="AssemblyInfo.cs">
+			using System.Reflection;
+			using System.Runtime.CompilerServices;
+
+			//
+			// General Information about an assembly is controlled through the following
+			// set of attributes. Change these attribute values to modify the information
+			// associated with an assembly.
+			//
+			[assembly: AssemblyTitle("SC_2bca370105ff4883a705860bac68cfba.csproj")]
+			[assembly: AssemblyDescription("")]
+			[assembly: AssemblyConfiguration("")]
+			[assembly: AssemblyCompany("Varigence")]
+			[assembly: AssemblyProduct("SC_2bca370105ff4883a705860bac68cfba.csproj")]
+			[assembly: AssemblyCopyright("Copyright @ Varigence 2011")]
+			[assembly: AssemblyTrademark("")]
+			[assembly: AssemblyCulture("")]
+			//
+			// Version information for an assembly consists of the following four values:
+			//
+			//      Major Version
+			//      Minor Version
+			//      Build Number
+			//      Revision
+			//
+			// You can specify all the values or you can default the Revision and Build Numbers
+			// by using the '*' as shown below:
+
+			[assembly: AssemblyVersion("1.0.*")]
+		</File>
+
+		<File Path="main.cs">
+			/* Microsoft SQL Server Integration Services Script Component
+			*  Write scripts using Microsoft Visual C# 2008.
+			*  ScriptMain is the entry point class of the script.*/
+
+			using System;
+			using System.Data;
+			using System.Linq;
+			using System.Net;
+			using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+			using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+			using System.IO;
+			using System.Text.RegularExpressions;
+
+			[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+			public class ScriptMain : UserComponent
+			{
+			string fileName;
+			string[] fileContents;
+			DateTime tradeDate;
+
+			/// This method is called once, before rows begin to be processed in the data flow.
+			///
+			/// You can remove this method if you don't need to do anything here.
+			///
+
+			public override void PreExecute()
+			{
+			base.PreExecute();
+
+			fileName = Variables.vFileFullPath;
+			fileContents = File.ReadAllLines(fileName);
+			tradeDate = TradeDateGet(fileContents[2]);
+			}
+
+			/// This method is called after all the rows have passed through this component.
+			///
+			/// You can delete this method if you don't need to do anything here.
+			///
+			public override void PostExecute()
+			{
+			base.PostExecute();
+			}
+
+			public override void CreateNewOutputRows()
+			{
+			string[] csvSplit;
+			int fileLength = fileContents.Length;
+
+			for (int i = 7; i &lt; fileLength - 1; i++)
+			{
+			csvSplit = RemoveDelimiter(fileContents[i]).Split(",".ToCharArray());
+			Output0Buffer.AddRow();
+			Output0Buffer.ASXCode = csvSplit[2];
+			Output0Buffer.CompanyName = csvSplit[3];
+
+			if (csvSplit[4] == "-")
+			Output0Buffer.MarketCapBil_IsNull = true;
+			else
+			Output0Buffer.MarketCapBil = Decimal.Parse(csvSplit[4]);
+
+			if (csvSplit[9] == "-")
+			Output0Buffer.DPS_IsNull = true;
+			else
+			Output0Buffer.DPS = Decimal.Parse(csvSplit[9]);
+
+			if (csvSplit[10] == "")
+			Output0Buffer.Franking_IsNull = true;
+			else
+			Output0Buffer.Franking = csvSplit[10];
+
+			if (csvSplit[11] == "-")
+			Output0Buffer.DivYield_IsNull = true;
+			else
+			Output0Buffer.DivYield = Decimal.Parse(csvSplit[11]);
+
+			if (csvSplit[14] == "-")
+			Output0Buffer.EPS_IsNull = true;
+			else
+			Output0Buffer.EPS = Decimal.Parse(csvSplit[14]);
+
+			if (csvSplit[15] == "-")
+			Output0Buffer.PE_IsNull = true;
+			else
+			Output0Buffer.PE = Decimal.Parse(csvSplit[15]);
+
+			if (csvSplit[18] == "-")
+			Output0Buffer.NetAssetBack_IsNull = true;
+			else
+			Output0Buffer.NetAssetBack = Decimal.Parse(csvSplit[18]);
+
+			Output0Buffer.TradeDate = tradeDate;
+			}
+			}
+
+			private string RemoveDelimiter(string str)
+			{
+			int indexOfFirstQualifier = str.IndexOf("\"");
+			int indexOfDelimiter;
+
+			if (indexOfFirstQualifier == -1)
+			return str;
+
+			indexOfDelimiter = str.IndexOf(",", indexOfFirstQualifier + 1);
+
+			return str.Remove(indexOfDelimiter, 1);
+			}
+
+			private DateTime TradeDateGet(string stringToMatch)
+			{
+			//var stringToMatch = "XAO 5437.3 at 2013-10-28T16:40:05. Report at Monday, October 28, 2013. Processed Tuesday at 2013-10-29T01:00:03+11:00.";
+			var regex = new Regex(@"^(.+?)(?&lt;date&gt;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})");
+			var matches = regex.Match(stringToMatch);
+
+			DateTime date = DateTime.Today;
+
+			var dateString = matches.Groups["date"].Value;
+
+			date = DateTime.Parse(dateString);
+
+			return date;
+			}
+			}
+		</File>
+	</Files>
+</ScriptComponentProject>

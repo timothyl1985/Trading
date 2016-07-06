@@ -1,0 +1,64 @@
+<Container Name="Sequence (Download CSV)" ConstraintMode="Linear">
+	<Variables>
+		<Variable Name="vStartDate" DataType="DateTime">
+			1899-12-30
+		</Variable>
+		<Variable Name="vEndDate" DataType="DateTime">
+			1899-12-30
+		</Variable>
+		<Variable Name="vFilesToDownloadRecordSet" DataType="Object">
+		</Variable>
+	</Variables>
+	<Tasks>
+		<ExecuteSQL Name="SQLTask (CMD TIMDB) Set Start and End Date" ConnectionName="CMD TIMDB" ResultSet="SingleRow">
+			<Parameters>
+				<Parameter VariableName="SSIS.AFR.pStartDate" Direction="Input" DataType="Date" Name="0" Length="0"/>
+				<Parameter VariableName="SSIS.AFR.pEndDate" Direction="Input" DataType="Date" Name="1" Length="0"/>
+			</Parameters>
+			<Results>
+				<Result Name="StartDate" VariableName="User.vStartDate"/>
+				<Result Name="EndDate" VariableName="User.vEndDate"/>
+			</Results>
+			<DirectInput>
+				declare @StartDate date = ?;
+				declare @EndDate date = ?;
+				declare @LastSaturday date;
+
+				select @LastSaturday = dateadd(dd, -7, max(DateKey))
+				from Util.DimDate
+				where DayOfWeek = 6 and DateKey &lt;= getdate();
+
+				select case when @StartDate = '1899-12-30' then @LastSaturday else @StartDate end as StartDate
+				, case when @EndDate = '1899-12-30' then @LastSaturday else @EndDate end as EndDate
+			</DirectInput>
+		</ExecuteSQL>
+		<Dataflow Name="Construct Download URL">
+			<Transformations>
+				<OleDbSource Name="Source (CMD TIMDB) DimDate" ConnectionName="CMD TIMDB">
+					<Parameters>
+						<Parameter Name="0" VariableName="User.vStartDate"/>
+						<Parameter Name="1" VariableName="User.vEndDate"/>
+					</Parameters>
+					<DirectInput>
+						select DateKey
+						from Util.DimDate
+						where DateKey >= ? and DateKey &lt;= ? and DayOfWeek = 6
+					</DirectInput>
+				</OleDbSource>
+				<ScriptComponentTransformation Name="Script Transformation (Build URL and File Name)">
+					<ScriptComponentProjectReference ScriptComponentProjectName="Script Transformation (Build URL and File Name)"/>
+				</ScriptComponentTransformation>
+				<RecordsetDestination Name="Destination (Download RecordSet)" VariableName="User.vFilesToDownloadRecordSet">
+					<Columns>
+						<Column SourceColumn="URL" TargetColumn="URL"/>
+						<Column SourceColumn="FileName" TargetColumn="FileName"/>
+						<Column SourceColumn="DateKey" TargetColumn="DateKey"/>
+					</Columns>
+				</RecordsetDestination>
+			</Transformations>
+		</Dataflow>
+		<Script Name="Script (Download CSV)">
+			<ScriptTaskProjectReference ScriptTaskProjectName="Script (Download CSV)"/>
+		</Script>
+	</Tasks>
+</Container>

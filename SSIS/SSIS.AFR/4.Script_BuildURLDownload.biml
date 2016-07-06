@@ -1,0 +1,118 @@
+<ScriptComponentProject ProjectCoreName="SC_2bca370105ff4883a705860bac68cfba" Name="Script Transformation (Build URL and File Name)">
+	<AssemblyReferences>
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.DTSPipelineWrap.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.DTSRuntimeWrap.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.PipelineHost.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.TxScript.dll" />
+		<AssemblyReference AssemblyPath="System.dll" />
+		<AssemblyReference AssemblyPath="System.Data.dll" />
+		<AssemblyReference AssemblyPath="System.Xml.dll" />
+		<AssemblyReference AssemblyPath="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL, Custom=null" />
+	</AssemblyReferences>
+	<InputBuffer Name="Input0">
+		<Columns>
+			<Column Name="DateKey" DataType="Date"></Column>
+		</Columns>
+	</InputBuffer>
+	<OutputBuffers>
+		<OutputBuffer Name="Output0">
+			<Columns>
+				<Column Name="URL" DataType="AnsiString" Length="250"></Column>
+				<Column Name="FileName" DataType="AnsiString" Length="250"></Column>
+			</Columns>
+		</OutputBuffer>
+	</OutputBuffers>
+	<ReadOnlyVariables>
+		<Variable VariableName="pCSVFileName" Namespace="$Package" DataType="String"></Variable>
+		<Variable VariableName="pCSVFileNameDownloaded" Namespace="$Package" DataType="String"></Variable>
+		<Variable VariableName="pCSVFileNamePrev" Namespace="$Package" DataType="String"></Variable>
+		<Variable VariableName="pCSVURL" Namespace="$Project" DataType="String"></Variable>
+	</ReadOnlyVariables>
+	<Files>
+		<File Path="AssemblyInfo.cs">
+			using System.Reflection;
+			using System.Runtime.CompilerServices;
+
+			//
+			// General Information about an assembly is controlled through the following
+			// set of attributes. Change these attribute values to modify the information
+			// associated with an assembly.
+			//
+			[assembly: AssemblyTitle("SC_2bca370105ff4883a705860bac68cfba.csproj")]
+			[assembly: AssemblyDescription("")]
+			[assembly: AssemblyConfiguration("")]
+			[assembly: AssemblyCompany("Varigence")]
+			[assembly: AssemblyProduct("SC_2bca370105ff4883a705860bac68cfba.csproj")]
+			[assembly: AssemblyCopyright("Copyright @ Varigence 2011")]
+			[assembly: AssemblyTrademark("")]
+			[assembly: AssemblyCulture("")]
+			//
+			// Version information for an assembly consists of the following four values:
+			//
+			//      Major Version
+			//      Minor Version
+			//      Build Number
+			//      Revision
+			//
+			// You can specify all the values or you can default the Revision and Build Numbers
+			// by using the '*' as shown below:
+
+			[assembly: AssemblyVersion("1.0.*")]
+		</File>
+
+		<File Path="main.cs">
+			/* Microsoft SQL Server Integration Services Script Component
+			*  Write scripts using Microsoft Visual C# 2008.
+			*  ScriptMain is the entry point class of the script.*/
+
+			using System;
+			using System.Data;
+			using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+			using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+			[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+			public class ScriptMain : UserComponent
+			{
+				string csvFileName;
+				string csvFileNamePrev;
+				string csvURL;
+				string csvFileNameDownloaded;
+				
+				public override void PreExecute()
+				{
+					base.PreExecute();
+
+					csvFileName = Variables.pCSVFileName;
+					csvFileNamePrev = Variables.pCSVFileNamePrev;
+					csvURL = Variables.pCSVURL;
+					csvFileNameDownloaded = Variables.pCSVFileNameDownloaded;
+				}
+
+				public override void PostExecute()
+				{
+					base.PostExecute();
+					/*
+					* Add your code here
+					*/
+				}
+
+				public override void Input0_ProcessInputRow(Input0Buffer Row)
+				{
+					string url = "";
+					if (Row.DateKey &lt; DateTime.Parse("2016-01-23"))
+					{
+						url = csvURL.Replace("YYYYMMDD", Row.DateKey.ToString("yyyyMMdd")) 
+								+ csvFileNamePrev.Replace("YYMMDD", Row.DateKey.ToString("yyMMdd"));
+					}
+					else
+					{
+						url = csvURL.Replace("YYYYMMDD", Row.DateKey.ToString("yyyyMMdd")) + csvFileName;
+						Row.URL = url;
+					}
+					Row.URL = url;
+					Row.FileName = csvFileNameDownloaded.Replace("YYYYMMDD", Row.DateKey.ToString("yyyyMMdd"));
+				}
+			}
+		</File>
+	</Files>
+</ScriptComponentProject>

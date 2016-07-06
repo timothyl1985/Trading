@@ -1,0 +1,92 @@
+<ScriptTaskProject ProjectCoreName="Script (Download CSV)" Name="Script (Download CSV)" VstaMajorVersion="0">
+	<ReadOnlyVariables>
+		<Variable Namespace="User" VariableName="vFilesToDownloadRecordSet" DataType="Object" />
+		<Variable Namespace="$Package" VariableName="pStagingDirectory" DataType="String" />
+	</ReadOnlyVariables>
+	<AssemblyReferences>
+		<AssemblyReference AssemblyPath="System" />
+		<AssemblyReference AssemblyPath="System.Data" />
+		<AssemblyReference AssemblyPath="System.Windows.Forms" />
+		<AssemblyReference AssemblyPath="System.Xml" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.ManagedDTS.dll" />
+		<AssemblyReference AssemblyPath="Microsoft.SqlServer.ScriptTask.dll" />
+	</AssemblyReferences>
+	<Files>
+		<File Path="Properties\AssemblyInfo.cs" BuildAction="Compile">
+			using System.Reflection;
+			using System.Runtime.CompilerServices;
+
+			[assembly: AssemblyVersion("1.0.*")]
+		</File>
+		<File Path="ScriptMain.cs" BuildAction="Compile">
+			#region Help:  Introduction to the script task
+			/* The Script Task allows you to perform virtually any operation that can be accomplished in
+			* a .Net application within the context of an Integration Services control flow.
+			*
+			* Expand the other regions which have "Help" prefixes for examples of specific ways to use
+			* Integration Services features within this script task. */
+			#endregion
+
+
+			#region Namespaces
+			using System;
+			using System.Data;
+			using System.Data.OleDb;
+			using Microsoft.SqlServer.Dts.Runtime;
+			using System.Windows.Forms;
+			using System.Net;
+			#endregion
+
+			namespace ST_93987a015cb94dda8bad0725c703f96e
+			{
+				[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+				public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+				{
+					public void Main()
+					{
+						DataTable datatable = new DataTable();
+						OleDbDataAdapter oAdapter = new OleDbDataAdapter();
+
+						oAdapter.Fill(datatable, Dts.Variables["User::vFilesToDownloadRecordSet"].Value);
+
+						string stagingDirectory = Dts.Variables["$Package::pStagingDirectory"].Value.ToString();
+
+						foreach (DataRow row in datatable.Rows)
+						{
+							string fileName = stagingDirectory + row[1].ToString();
+							string uri = row[0].ToString();
+
+							WebClient myWebClient = new WebClient();
+							try
+                            {
+                                myWebClient.DownloadFile(uri, fileName);
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.Message.Contains("404"))
+                                {
+                                    string message = "File not found: " + uri;
+                                    Dts.Events.FireWarning(14, "Downloading File", message, "", 0);
+                                }
+                                else
+                                {
+                                    throw ex;
+                                }
+                            }
+						}
+
+						Dts.TaskResult = (int)ScriptResults.Success;
+					}
+
+					#region ScriptResults declaration
+					enum ScriptResults
+					{
+						Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+						Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+					};
+					#endregion
+				}
+			}
+		</File>
+	</Files>
+</ScriptTaskProject>
