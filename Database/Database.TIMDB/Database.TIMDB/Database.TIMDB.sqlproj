@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Database.TIMDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a74c5d69-0706-4871-a69c-fd2185d052fc}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Database.TIMDB</RootNamespace>
+    <AssemblyName>Database.TIMDB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <ReadCommittedSnapshot>True</ReadCommittedSnapshot>
+    <Recovery>SIMPLE</Recovery>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables\" />
+    <Folder Include="Functions\dbo\" />
+    <Folder Include="Functions\" />
+    <Folder Include="Security\Schema\" />
+    <Folder Include="Security\" />
+    <Folder Include="Deployment" />
+    <Folder Include="Deployment\Local" />
+    <Folder Include="Tables\Staging" />
+    <Folder Include="Tables\Reference" />
+    <Folder Include="Tables\Market" />
+    <Folder Include="Tables\Util" />
+    <Folder Include="Functions\Util" />
+    <Folder Include="Programmability" />
+    <Folder Include="Programmability\Stored Procedures" />
+    <Folder Include="Programmability\Stored Procedures\Market" />
+    <Folder Include="Programmability\Stored Procedures\Staging" />
+    <Folder Include="Programmability\Types" />
+    <Folder Include="Programmability\Types\User-Defined Data Types" />
+    <Folder Include="Programmability\Types\User-Defined Data Types\Market" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Post-Deployment" />
+    <Folder Include="Scripts\Post-Deployment\Util-Data" />
+    <Folder Include="Scripts\Post-Deployment\Market-Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Functions\dbo\fntCalculateEntropy.sql" />
+    <Build Include="Security\Schema\Trade.sql" />
+    <Build Include="Security\Schema\Staging.sql" />
+    <Build Include="Tables\Staging\Sector.sql" />
+    <Build Include="Security\Schema\Reference.sql" />
+    <Build Include="Tables\Reference\Sector.sql" />
+    <Build Include="Tables\Staging\Industry.sql" />
+    <Build Include="Tables\Reference\Industry.sql" />
+    <Build Include="Tables\Staging\Company.sql" />
+    <Build Include="Tables\Staging\ASXCompany.sql" />
+    <Build Include="Security\Schema\Market.sql" />
+    <Build Include="Tables\Market\ASXCompany.sql" />
+    <Build Include="Tables\Util\DimDate.sql" />
+    <Build Include="Tables\Util\Numbers.sql" />
+    <Build Include="Security\Schema\Util.sql" />
+    <Build Include="Tables\Market\SecurityPrice.sql" />
+    <Build Include="Tables\Staging\SecurityPrice.sql" />
+    <Build Include="Functions\Util\fntSplitString.sql" />
+    <Build Include="Tables\Staging\SecurityYahoo.sql" />
+    <Build Include="Tables\Staging\SecurityFundamental.sql" />
+    <Build Include="Tables\Market\SecurityFundamental.sql" />
+    <Build Include="Programmability\Stored Procedures\Market\QuirkyUpdateEMA.sql" />
+    <Build Include="Programmability\Stored Procedures\Market\QuirkyUpdateMA.sql" />
+    <Build Include="Programmability\Stored Procedures\Market\QuirkyUpdateRSI.sql" />
+    <Build Include="Programmability\Stored Procedures\Market\UpdateSO.sql" />
+    <Build Include="Programmability\Stored Procedures\Market\Verify.sql" />
+    <Build Include="Programmability\Stored Procedures\Staging\uspASXCompanyMerge.sql" />
+    <Build Include="Programmability\Stored Procedures\Staging\uspIndustryMerge.sql" />
+    <Build Include="Programmability\Stored Procedures\Staging\uspSectorMerge.sql" />
+    <Build Include="Programmability\Stored Procedures\Staging\uspSecurityPriceMerge.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\Market\TickerType.sql" />
+    <Build Include="Programmability\Stored Procedures\Staging\uspSecurityFundamentalMerge.sql" />
+    <Build Include="Tables\Market\CashRate.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Deployment\Local\Database.TIMDB.publish.xml" />
+    <None Include="Scripts\Post-Deployment\Util-Data\DimDateBulkInsert.sql" />
+    <None Include="Scripts\Post-Deployment\Market-Data\CashRateBulkInsert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment1.sql" />
+  </ItemGroup>
+</Project>
